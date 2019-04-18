@@ -8,15 +8,15 @@ from home.models import Issue, IssueComment, IssueVote
 from home.forms import IssueForm, IssueCommentForm
 
 
-def view(request, uid):
+def view(request):
 	try:
 		context = {}
 
-		issue = Issue.objects.get(uid=uid)
-		comments = IssueComment.objects.filter(issue_id=uid)
+		# issue = Issue.objects.get(uid=uid)
+		# comments = IssueComment.objects.filter(issue_id=uid)
 
-		context['issue'] = issue
-		context['comments'] = comments
+		# context['issue'] = issue
+		# context['comments'] = comments
 
 		return render(request, 'home/issue/view.html', context)
 

@@ -1,14 +1,51 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block extra_head %}
-	<time>Issue: {{issue.title}}</time>
+	<title>Issue: Bridge Vainga Geche</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/home/issue/view.css' %}">
 {% endblock %}
 
 
 
 {% block extra_body %}
-	<h6>{{ issue.title }}</h6>
-	<p>{{ body }}</p>
+	<div class="container">
+	    <h1 class="issue-title">Rastay Gorto</h1>
+	    <small class="issue-data"><i class="fas fa-user"></i> Akkas Ali <i class="fas fa-calendar-alt"></i>  1 April, 2019 <i class="fas fa-map-marker-alt"></i> State of Noakhali</small>
+	    <img class="issue-image" src="https://previews.123rf.com/images/louisstang/louisstang1407/louisstang140700002/30191246-damaged-road.jpg" alt="Issue Image">
+	    <p class="issue-details">
+		    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		    <br>
+		    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	    </p>
+	    <div class="issue-interraction-buttons">
+		    <button class="btn btn-info"><i class="fas fa-heart"></i> Upvote (1.2M)</button>
+		    <button class="btn btn-danger"><i class="fas fa-flag"></i> Flag</button>
+	  	</div>
+	    <form action="/action_page.php">
+		    <div class="input-group mb-3">
+			    <textarea class="form-control" placeholder="Add Comment"></textarea>
+			    <div class="input-group-append">
+		        	<button class="btn btn-info">Submit</button>
+		      	</div>
+		    </div>
+	  </form>
+	  <div class="comments">
+		  	<img class="user-picture" src="https://avatars3.githubusercontent.com/u/3599324?s=400&v=4" alt="person"width="60px"height="60px" style="display:inline-block">
+		  	<h5 style="display:inline-block;"> Person <br><small>Date | Time</small></h5>
+		  	<p class="comment-text">  Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+	  </div>
+  </div>
 {% endblock %}
 
 
