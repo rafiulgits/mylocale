@@ -1,0 +1,60 @@
+.container {
+	margin-top: 85px;
+	color: #333;
+}
+
+.tasks-header, .local-issue-header {
+	color: #1D2129;
+	margin-bottom: 15px;
+}
+.issues {
+	padding-bottom: 50px;
+	border-bottom: 2px solid #DDDFE2;
+}
+.issue-card, .task-card {
+	background: #fff;
+	padding: 10px 15px 0px 15px;
+	border: 1px solid #DDDFE2;
+	border-radius: 5px;
+}
+.issue-title {
+	margin-bottom: 0;
+}
+.issue-data {
+	display: block;
+	width: 100%;
+	margin-bottom: 10px;
+	padding-top: 5px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #DDDFE2;
+	color: #888;
+}
+.issue-details, .task-details {
+	overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+.issue-interract-buttons, .task-interract-buttons {
+	margin-top: 15px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	/*background: #17A2B8;*/
+}
+.tasks {
+	margin-top: 30px;
+}
+
+.task-title {
+	display: block;
+	width: 100%;
+	margin-bottom: 10px;
+	padding-top: 5px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #DDDFE2;
+}
+
+.create-issue {
+	position: sticky;
+}
