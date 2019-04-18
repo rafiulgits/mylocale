@@ -21,7 +21,7 @@ class Crop(models.Model):
 	name = models.CharField(max_length=80)
 	description = models.TextField()
 	media = models.ImageField(upload_to=CROP_IMAGE_DIR)
-	user = models.ForeignKey(Account, on_delete=models)
+	user = models.ForeignKey(Account, on_delete=models.CASCADE)
 
 
 
@@ -32,4 +32,4 @@ class Event(models.Model):
 	description = models.TextField()
 	time_date = models.DateTimeField()
 	address = models.CharField(max_length=50)
-	user = models.ForeignKey(Account, on_delete=models)
+	user = models.ForeignKey(Account, on_delete=models.CASCADE)
