@@ -47,7 +47,7 @@ class IssueVote(models.Model):
 
 
 class Task(models.Model):
-	task = models.CharField(max_length=80)
+	title = models.CharField(max_length=80)
 	description = models.TextField()
 	time_date = models.DateTimeField(auto_now_add=True)
 	is_running = models.BooleanField(default=True)
