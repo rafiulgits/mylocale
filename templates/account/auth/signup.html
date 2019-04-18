@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+	<title>Sign Up</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/generic/form-std.css' %}">
+{% endblock %}
+
+
+{% block extra_body %}
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="col-lg-6 list-group-item">
+            <h6 align="center">Registration form</h6>
+            <form class="form-block" method="POST">
+                {% csrf_token %}
+                {% csrf_token %}
+                    {{ form.name.label }}
+                    {{ form.name }}
+
+                    {{ form.phone.label}}
+                    {% if form.errors.phone %}
+                        <strong class="list-group-item list-group-item-danger">{{ form.errors.phone}}</strong>
+                    {% endif %}
+                    {{ form.phone}}
+
+                    {{ form.email.label}}
+                    {% if form.errors.email %}
+                        <strong class="list-group-item list-group-item-danger">{{ form.errors.email}}</strong>
+                    {% endif %}
+                    {{ form.email}}
+
+                    {{ form.nid.label}}
+                    {% if form.errors.nid %}
+                        <strong class="list-group-item list-group-item-danger">{{ form.errors.nid }}</strong>
+                    {% endif %}
+                    {{ form.nid}}
+
+                    {{ form.gender.label}}
+                    {{ form.gender}}
+
+                    {{ form.password1.label}}
+                    {% if form.errors.password1 %}
+                        <strong class="list-group-item list-group-item-danger">{{ form.errors.password1 }}</strong>
+                    {% endif %}
+                    {{ form.password1 }}
+
+                    {{ form.password2.label}}
+                    {% if form.errors.password2 %}
+                        <strong class="list-group-item list-group-item-danger">{{ form.errors.password1 }}</strong>
+                    {% endif %}
+                    {{ form.password2 }}
+
+                    <input type="submit" value="Sign Up" class="btn btn-success btn-block">
+            </form>
+            <div class="list-group-item">
+                Already have an account?
+                <a href="/account/signin/" class="">
+                    signin
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block extra_script %}
+	
+{% endblock %}

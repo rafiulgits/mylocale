@@ -12,7 +12,7 @@ class SignupForm(forms.ModelForm):
 
 	class Meta:
 		model = Account
-		fields = ['phone', 'name', 'email', 'gender']
+		fields = ['phone', 'name', 'nid', 'email', 'gender']
 
 		widgets = {
 			'name' : forms.TextInput(attrs={
@@ -30,6 +30,11 @@ class SignupForm(forms.ModelForm):
 			'gender' : forms.Select(attrs={
 				'class' : 'custom-select'
 				}),
+
+			'nid' : forms.TextInput(attrs={
+				'class' : 'form-control', 'placeholder' : 'National ID', 
+				'maxLength':'17'
+				})
 		}
 
 	def clean_phone(self):
@@ -52,6 +57,15 @@ class SignupForm(forms.ModelForm):
 		return email
 
 
+
+	def clean_nid(self):
+		nid = self.cleaned_data['nid']
+		query = Account.objects.filter(nid=nid).first()
+		if query is not None:
+			raise forms.ValidationError('this nid already registered')
+		return nid
+
+
 	def clean_password2(self):
 		password1 = self.cleaned_data['password1']
 		password2 = self.cleaned_data['password2']
@@ -70,14 +84,20 @@ class SignupForm(forms.ModelForm):
 		return user
 
 
-class SigninForm(forms.Form):
-	phone = forms.CharField(max_length=12, widget=forms.TextInput(attrs=
-		{'placeholder' : 'Phone', 
-		'class' : 'form-control'}))
-
+class SigninForm(forms.ModelForm):
 	password = forms.CharField(widget=forms.PasswordInput(attrs=
 		{'placeholder' : 'Password', 
 		'class' : 'form-control'}))
+
+	class Meta:
+		model = Account
+		fields = ['nid']
+		widgets = {
+			'nid' : forms.TextInput(attrs={
+				'class':'form-control', 'placeholder' : 'National ID', 
+				'maxLength':'17'
+				})
+		}
 
 
 class PasswordChangeForm(forms.Form):

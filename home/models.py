@@ -10,7 +10,7 @@ ISSUE_REPORT = (
 )
 
 
-class Location(model.Model):
+class Location(models.Model):
 	uid = models.UUIDField(default=uuid4, primary_key=True)
 	geo_lat = models.DecimalField(max_digits=22, decimal_places=16)
 	geo_lng = models.DecimalField(max_digits=22, decimal_places=16)
@@ -44,5 +44,5 @@ class UserIssueReport(models.Model):
 	uid = models.UUIDField(default=uuid4, primary_key=True)
 	user = models.ForeignKey(Account, on_delete=models.CASCADE)
 	issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
-	report = models.CharField(choices=ISSUE_REPORT)
+	report = models.CharField(max_length=2, choices=ISSUE_REPORT)
 	time_date = models.DateTimeField(auto_now=True)

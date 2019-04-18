@@ -18,7 +18,7 @@ class UserManager(BaseUserManager):
 	"""
 	Doc here
 	"""
-	def create_user(self, phone, name, email, gender, password=None, is_staff=False, is_superuser=False):
+	def create_user(self, phone, name, email, gender, nid, password=None, is_staff=False, is_superuser=False):
 
 		if not phone or not name or not email:
 			raise ValueError('name, phone, email required')
@@ -27,7 +27,7 @@ class UserManager(BaseUserManager):
 			raise ValueError('password required')
 
 
-		user = self.model(phone=phone, name=name, email=email, gender=gender)
+		user = self.model(phone=phone, name=name, email=email, gender=gender, nid=nid)
 		user.is_staff = is_staff
 		user.is_superuser = is_superuser
 		user.set_password(password)
@@ -36,13 +36,13 @@ class UserManager(BaseUserManager):
 		return user
 
 
-	def create_staffuser(self, phone, name, email, gender, password=None):
-		user = self.create_user(phone, name, email, gender, password, True, False)
+	def create_staffuser(self, phone, name, email, gender,nid, password=None):
+		user = self.create_user(phone, name, email, gender,nid, password, True, False)
 		return user
 
 
-	def create_superuser(self, phone, name, email, gender, password=None):
-		user = self.create_user(phone, name, email, gender, password, True, True)
+	def create_superuser(self, phone, name, email, gender,nid, password=None):
+		user = self.create_user(phone, name, email, gender,nid, password, True, True)
 
 
 
@@ -54,6 +54,7 @@ class Account(AbstractBaseUser,PermissionsMixin):
 	name = models.CharField(max_length=80)
 	gender = models.CharField(max_length=1, choices=_GENDER, default='*')
 	email = models.EmailField(max_length=45, unique=True)
+	nid = models.CharField(max_length=17, unique=True)
 	thumbnail = models.TextField(default='https://i.postimg.cc/Y2zkXSFB/user.png')
 
 	has_notification = models.BooleanField(default=False)
@@ -62,8 +63,8 @@ class Account(AbstractBaseUser,PermissionsMixin):
 	is_staff = models.BooleanField(default=False)
 	is_superuser = models.BooleanField(default=False)
 
-	USERNAME_FIELD = 'phone'
-	REQUIRED_FIELDS = ['name', 'email', 'gender']
+	USERNAME_FIELD = 'nid'
+	REQUIRED_FIELDS = ['name', 'email', 'gender', 'phone']
 
 	objects = UserManager()
 
