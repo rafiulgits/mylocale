@@ -3,7 +3,7 @@ from django.db import models
 from generic.variables import ISSUE_IMAGE_DIR
 from uuid import uuid4
 
-ISSUE_REPORT = (
+TASK_REPORT = (
 	('St', 'Satisfied-Service'),
 	('Ps', 'Poor-Service'),
 	('Ns', 'No-Service')
@@ -23,26 +23,41 @@ class Issue(models.Model):
 	title = models.CharField(max_length=50)
 	body = models.TextField()
 	location = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True)
+	in_progress = models.BooleanField(default=False)
 	is_open = models.BooleanField(default=True)
 	time_date = models.DateTimeField(auto_now=True)
 	media = models.ImageField(upload_to=ISSUE_IMAGE_DIR, blank=True, null=True)
-	total_st = models.PositiveIntegerField(default=0)
-	total_ps = models.PositiveIntegerField(default=0)
-	total_ns = models.PositiveIntegerField(default=0)
+	vote = models.PositiveIntegerField(default=0)
 
 
 
 class IssueComment(models.Model):
+	uid = models.UUIDField(default=uuid4, primary_key=True)
 	issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
 	user = models.ForeignKey(Account, on_delete=models.CASCADE)
 	body = models.TextField()
 	time_date = models.DateTimeField(auto_now=True)
 
 
-
-class UserIssueReport(models.Model):
+class IssueVote(models.Model):
 	uid = models.UUIDField(default=uuid4, primary_key=True)
 	user = models.ForeignKey(Account, on_delete=models.CASCADE)
 	issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
-	report = models.CharField(max_length=2, choices=ISSUE_REPORT)
-	time_date = models.DateTimeField(auto_now=True)
+
+
+
+class Task(models.Model):
+	title = models.CharField(max_length=80)
+	description = models.TextField()
+	time_date = models.DateTimeField(auto_now_add=True)
+	is_running = models.BooleanField(default=True)
+	issues = models.ManyToManyField(Issue)
+
+
+
+class UserTaskReport(models.Model):
+	uid = models.UUIDField(default=uuid4, primary_key=True)
+	task = models.ForeignKey(Task, on_delete=models.CASCADE)
+	user = models.ForeignKey(Account, on_delete=models.CASCADE)
+	report = models.CharField(max_length=2, choices=TASK_REPORT)
+	time_date = models.DateTimeField(auto_now_add=True)
