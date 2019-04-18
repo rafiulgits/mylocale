@@ -57,7 +57,6 @@ class Account(AbstractBaseUser,PermissionsMixin):
 	thumbnail = models.TextField(default='https://i.postimg.cc/Y2zkXSFB/user.png')
 
 	has_notification = models.BooleanField(default=False)
-	is_guide = models.BooleanField(default=False)
 	
 	is_active = models.BooleanField(default=True)
 	is_staff = models.BooleanField(default=False)
@@ -92,5 +91,8 @@ class Account(AbstractBaseUser,PermissionsMixin):
 
 
 
-# class Notification(models.Model):
-# 	pass
+class Notification(models.Model):
+	uid = models.UUIDField(default=uuid4, primary_key=True)
+	body = models.CharField(max_length=80)
+	action = models.CharField(max_length=120, default='#')
+	user = models.ForeignKey(Account, on_delete=models.CASCADE)
