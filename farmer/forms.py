@@ -1,0 +1,75 @@
+from django import forms
+from farmer.models import Crop, Event
+
+
+class CropForm(forms.ModelForm):
+	class Meta:
+		model = Crop
+		fields = ['category', 'name', 'description', 'media',]
+
+		widgets = {
+			'category':forms.Select(attrs=
+				{'class' : 'custom-select'}),
+
+			'name':forms.TextInput(attrs=
+				{'class':'form-control',
+				'placeholder' : 'Mango'}),
+			'description':forms.Textarea(attrs=
+				{'class':'form-control', 
+				'placeholder': 'Description about mango'}),
+
+			'media':forms.FileInput(attrs=
+				{'class':'form-control'})
+		}
+
+
+	def save(self, commit=True):
+		crop = super(CropForm, self).save(commit=False)
+		crop.user = self.user
+		if commit:
+			crop.save()
+
+		return crop
+
+
+
+	def __init__(self, *args, **kwargs):
+		self.user = kwargs.pop('user', None)
+		super(CropForm, self).__init__(*args, **kwargs)
+
+
+
+
+class EventForm(forms.ModelForm):
+	class Meta:
+		model = Event
+		fields = [ 'title', 'description', 'address',]
+
+		widgets = {
+
+			'title':forms.TextInput(attrs=
+				{'class':'form-control',
+				'placeholder' : 'Mango'}),
+			'description':forms.Textarea(attrs=
+				{'class':'form-control', 
+				'placeholder': 'Description about mango'}),
+
+			'address':forms.TextInput(attrs=
+				{'class':'form-control',
+				'placeholder' : 'Event Location Address'})
+		}
+
+
+	def save(self, commit=True):
+		event = super(EventForm, self).save(commit=False)
+		event.user = self.user
+		if commit:
+			event.save()
+
+		return event
+
+
+
+	def __init__(self, *args, **kwargs):
+		self.user = kwargs.pop('user', None)
+		super(EventForm, self).__init__(*args, **kwargs)

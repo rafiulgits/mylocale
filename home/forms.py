@@ -1,6 +1,6 @@
 from django import forms
 
-from home.models import Issue, IssueComment, UserIssueReport
+from home.models import Issue, IssueComment, Task, UserTaskReport
 
 
 class IssueForm(forms.ModelForm):
@@ -54,7 +54,7 @@ class IssueCommentForm(forms.ModelForm):
 		if commit:
 			issue.save()
 
-		return comment
+		return issue
 
 
 	def __init__(self, *args, **kwargs):
@@ -65,9 +65,35 @@ class IssueCommentForm(forms.ModelForm):
 
 
 
-class UserIssueReportForm(forms.ModelForm):
+class TaskForm(forms.ModelForm):
+	issues = forms.ModelMultipleChoiceField(queryset=Issue.objects.all())
+
 	class Meta:
-		model = UserIssueReport
+		model = Task
+		fields = ['title','description']
+
+		widgets = {
+			'title' : forms.TextInput(attrs=
+				{'class' : 'form-control', 'placeholder' : 'What is your task?'}),
+			'description' : forms.Textarea(attrs=
+				{'class' : 'form-control', 
+				'placeholder' : 'Define your task'})
+		}
+
+
+
+	def save(self, commit=True):
+		task = super(TaskForm, self).save(commit=False)
+		if commit:
+			task.save()
+		return task
+
+
+
+
+class UserTaskReportForm(forms.ModelForm):
+	class Meta:
+		model = UserTaskReport
 		fields = ['report']
 		widgets = {
 			'report' : forms.Select(attrs=
@@ -78,7 +104,7 @@ class UserIssueReportForm(forms.ModelForm):
 	def save(self, commit=True):
 		report = super(UserIssueReportForm, self).save(commit=False)
 		report.user = self.user
-		report.issue = self.issue
+		report.task = self.task
 
 		if commit:
 			report.save()
@@ -87,5 +113,5 @@ class UserIssueReportForm(forms.ModelForm):
 
 	def __init__(self, *args, **kwargs):
 		self.user = kwargs.pop('user', None)
-		self.issue = kwargs.pop('issue', None)
+		self.task = kwargs.pop('task', None)
 		super(UserIssueReportForm, self).__init__(*args, **kwargs)

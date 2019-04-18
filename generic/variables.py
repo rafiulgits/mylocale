@@ -1,5 +1,6 @@
 LOGIN_URL = '/account/signin/'
 ISSUE_IMAGE_DIR = 'images/issue'
+CROP_IMAGE_DIR = 'images/crop'
 
 
 FILE_CHUNK_SIZE = 2500000

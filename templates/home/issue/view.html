@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block extra_head %}
+	<time>Issue: {{issue.title}}</time>
+{% endblock %}
+
+
+
+{% block extra_body %}
+	<h6>{{ issue.title }}</h6>
+	<p>{{ body }}</p>
+{% endblock %}
+
+
+
+{% block extra_script %}
+
+{% endblock %}
