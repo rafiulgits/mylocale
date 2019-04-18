@@ -2,4 +2,6 @@ from django.shortcuts import render, redirect, HttpResponse
 
 
 def index(request):
-	return HttpResponse('Hello World')
+	context = {}
+
+	return render(request, 'home/manage/index.html', context)
