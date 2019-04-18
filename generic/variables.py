@@ -1,5 +1,7 @@
 LOGIN_URL = '/account/signin/'
-IMAGE_DIR = 'media/images'
+ISSUE_IMAGE_DIR = 'images/issue'
+
+
 FILE_CHUNK_SIZE = 2500000
 
 

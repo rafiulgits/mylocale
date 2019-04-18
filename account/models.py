@@ -88,3 +88,9 @@ class Account(AbstractBaseUser,PermissionsMixin):
 
 	def has_module_perms(self, perms, obj=None):
 		return all(self.has_perm(perm, obj) for perm in perms)
+
+
+
+
+# class Notification(models.Model):
+# 	pass
