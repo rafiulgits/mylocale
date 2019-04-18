@@ -1,3 +1,12 @@
+a {
+	text-decoration: none;
+	color: #444;
+	transition: .3s ease;
+}
+a:hover {
+	text-decoration: none;
+	color: #000;
+}
 .container {
 	margin-top: 85px;
 	color: #333;
@@ -5,7 +14,7 @@
 
 .tasks-header, .local-issue-header {
 	color: #1D2129;
-	margin-bottom: 15px;
+	margin-bottom: -25px;
 }
 .issues {
 	padding-bottom: 50px;
@@ -16,6 +25,7 @@
 	padding: 10px 15px 0px 15px;
 	border: 1px solid #DDDFE2;
 	border-radius: 5px;
+	margin-top: 50px;
 }
 .issue-title {
 	margin-bottom: 0;
@@ -55,6 +65,26 @@
 	border-bottom: 1px solid #DDDFE2;
 }
 
+.sidenav-card {
+	background: #fff;
+	padding: 10px 15px 0px 15px;
+	border: 1px solid #DDDFE2;
+	border-radius: 5px;
+	margin-top: 50px;
+}
+.sidenav-title {
+	display: block;
+	width: 100%;
+	margin-bottom: 10px;
+	padding-top: 5px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #DDDFE2;
+}
+.sidenav-list-option{
+	list-style: none;
+	padding-top: 5px;
+}
+
 .create-issue {
-	position: sticky;
+	margin-top: 64px;
 }
