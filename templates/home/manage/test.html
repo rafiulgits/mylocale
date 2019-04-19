@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+	<title>Test Only</title>
+{% endblock %}
+
+
+
+{% block extra_body %}
+    <div id="address"></div>
+{% endblock %}
+
+
+
+{% block extra_script %}
+
+	<script type="text/javascript">
+		$.getJSON('https://nominatim.openstreetmap.org/reverse?format=json&lat=24.9227528&lon=91.8269576&zoom=14&addressdetails=1',
+			function(data) {
+				console.log(data);
+				var addr = document.getElementById('address');
+				addr.innerHTML = data.address.locality + ", " + data.address.city + "-" + data.address.postcode + ", " + data.address.country;
+			}
+		);
+	</script>
+
+{% endblock %}

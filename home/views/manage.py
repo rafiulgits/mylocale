@@ -63,6 +63,14 @@ def search(request):
 
 
 
+def test(request):
+	context = {}
+	return render(request, 'home/manage/test.html', context)
+
+
+
+
+
 @login_required(login_url=LOGIN_URL)
 def staff_panel(request):
 	if not request.user.is_staff:
