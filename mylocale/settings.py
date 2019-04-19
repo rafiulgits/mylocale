@@ -40,7 +40,10 @@ INSTALLED_APPS = [
 
     'account',
     'home',
-    'farmer'
+    'farmer',
+
+    # third-party applications
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

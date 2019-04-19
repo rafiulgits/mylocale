@@ -26,15 +26,16 @@ def index(request):
 
 def search(request):
 	if request.method != 'POST':
-		return Http404('invalid request')
+		return HttpResponse('invalid request')
 
 	query = request.POST.get('query', None)
 	context = {}
 
 	# issue result
 	issue_result =Issue.objects.annotate(
-		search=SearchVector('user__name', 'title', 'body','location__address')
+		search=SearchVector('user__name', 'title', 'body', 'address')
 		).filter(search=query)
+
 
 	# task result
 	task_result = Task.objects.annotate(
