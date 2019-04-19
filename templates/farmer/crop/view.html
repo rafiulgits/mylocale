@@ -9,7 +9,7 @@
 
 {% block extra_body %}
 	<div class="container">
-	    <h1 class="crop-title">Dhaan</h1>
+	    <h1 class="crop-title">{{crop.name}}</h1>
 	    <div id="demo" class="carousel slide crop-image" data-ride="carousel">
 	        <ul class="carousel-indicators">
 	            <li data-target="#demo" data-slide-to="0" class="active"></li>
@@ -18,7 +18,7 @@
 	        </ul>
 	        <div class="carousel-inner">
 	            <div class="carousel-item active">
-	                <img src="https://s3-us-west-2.amazonaws.com/climate-com/images/data_visualization_banner_desktop.jpg" alt="Crop Field" width="1500px" height="500px">
+	                <img src="/{{crop.media}}" alt="Crop Field" width="1500px" height="500px">
 	                <div class="carousel-caption">
 	                    <h3>Dhaan</h3>
 	                    <p>Onek Shundor Dhaan</p>
@@ -46,10 +46,7 @@
 	            <span class="carousel-control-next-icon"></span>
 	        </a>
 	    </div>
-	    <p class="crop-details">Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-	        Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. <br> Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-	        Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-	    </p>
+	    <p class="crop-details">{{crop.description | linebreaks | urlize}}</p>
 	    <form>
 	        <div class="input-group mb-3">
 			    <textarea class="form-control" placeholder="Add Comment"></textarea>

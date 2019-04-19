@@ -4,6 +4,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect, HttpResponse
 
 from farmer.models import Event
+from farmer.forms import EventForm
 
 from generic.variables import LOGIN_URL
 
@@ -34,6 +35,14 @@ def list(request):
 def create(request):
 	if not request.user.is_staff:
 		return HttpResponse('access denied')
+
+	if request.method == 'POST':
+		form = EventForm(request.POST, user=request.user)
+		if form.is_valid():
+			event = form.save()
+			return redirect('/agriculture/event/'+str(event.uid)+'/')
+		else:
+			print(form.errors)
 
 	form = EventForm()
 	context = {}

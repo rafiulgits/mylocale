@@ -25,16 +25,18 @@ class CropForm(forms.ModelForm):
 class EventForm(forms.ModelForm):
 	class Meta:
 		model = Event
-		fields = [ 'title', 'description', 'address',]
+		fields = [ 'title', 'description', 'time', 'date', 'address',]
 
 		widgets = {
 
 			'title':forms.TextInput(attrs=
 				{'class':'form-control',
-				'placeholder' : 'Mango'}),
+				'placeholder' : 'সরকারীভাবে বীজ বিরতরণ'}),
 			'description':forms.Textarea(attrs=
 				{'class':'form-control', 
-				'placeholder': 'Description about mango'}),
+				'placeholder': 'Description'}),
+			'time' : forms.TimeInput(attrs={'type':'time'}),
+			'date' : forms.DateInput(attrs={'type': 'date'}),
 
 			'address':forms.TextInput(attrs=
 				{'class':'form-control',

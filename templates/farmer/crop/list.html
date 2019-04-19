@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load my_tags %}
 {% load staticfiles %}
 
 {% block extra_head %}
@@ -9,6 +10,19 @@
 {% block extra_body %}
 	<div class="container">
 	        <div class="row">
+
+	        	{% for item in crop_list %}
+	        		<div class="col-sm-12 col-lg-4 col-md-6">
+		                <div class="card">
+		                    <img class="card-img-top" src="/{{item.media}}" alt="Card image" style="width:100%">
+		                    <div class="card-body">
+		                        <h4 class="card-title">{{item.name}}</h4>
+		                        <p class="card-text">Category : {{ item.category | cat }}</p>
+		                        <a href="/agriculture/crop/{{item.uid}}/" class="btn btn-primary">See Article</a>
+		                    </div>
+		                </div>
+		            </div>
+	        	{% endfor %}
 	            <div class="col-sm-12 col-lg-4 col-md-6">
 	                <div class="card">
 	                    <img class="card-img-top" src="https://previews.123rf.com/images/lightmoon/lightmoon0910/lightmoon091000020/5663593-autumn-rice-field.jpg" alt="Card image" style="width:100%">

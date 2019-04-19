@@ -14,6 +14,13 @@ FOOD_CATEGORY = (
 	('Ot', 'Others')
 )
 
+FOOD_CATEGORY_DIC ={
+	'Rc' : 'Rice',
+	'Fr' : 'Fruits',
+	'Vg' : 'Vegetables',
+	'Ot' : 'Others'
+}
+
 
 class Crop(models.Model):
 	uid = models.UUIDField(default=uuid4, primary_key=True)
@@ -30,6 +37,7 @@ class Event(models.Model):
 	uid = models.UUIDField(default=uuid4, primary_key=True)
 	title = models.CharField(max_length=80)
 	description = models.TextField()
-	time_date = models.DateTimeField()
+	time = models.TimeField()
+	date = models.DateField()
 	address = models.CharField(max_length=50)
 	user = models.ForeignKey(Account, on_delete=models.CASCADE)

@@ -8,11 +8,11 @@ from farmer.forms import CropForm
 
 from generic.variables import LOGIN_URL
 
-def view(request):
+def view(request, uid):
 	try:
-		# crop = Crop.objects.get(uid=uid)
+		crop = Crop.objects.get(uid=uid)
 		context = {}
-		# context['crop'] = crop
+		context['crop'] = crop
 
 		return render(request, 'farmer/crop/view.html', context)
 
