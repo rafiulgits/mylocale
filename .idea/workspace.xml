@@ -8,6 +8,17 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/DemoT/CropBlog.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-918" />
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -21,13 +32,57 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="mylocale" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mylocale" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mylocale" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mylocale" type="462c0819:PsiDirectoryNode" />
+              <item name="DemoT" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mylocale" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mylocale" type="462c0819:PsiDirectoryNode" />
+              <item name="farmer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mylocale" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mylocale" type="462c0819:PsiDirectoryNode" />
+              <item name="generic" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mylocale" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mylocale" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mylocale" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mylocale" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mylocale" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -78,15 +133,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1555608916107</updated>
-      <workItem from="1555608917927" duration="290000" />
+      <workItem from="1555608917927" duration="984000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="290000" />
+    <option name="totallyTimeSpent" value="984000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
@@ -113,5 +169,12 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/DemoT/CropBlog.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-918" />
+      </provider>
+    </entry>
   </component>
 </project>
