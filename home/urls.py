@@ -15,6 +15,7 @@ urlpatterns = [
 	path('staff-panel/open-issuelist/', staff.open_issuelist, name='open_issuelist'),
 	path('staff-panel/progress-issuelist/', staff.progress_issuelist, name='progress_issuelist'),
 	path('staff-panel/close-issuelist/', staff.close_issuelist, name='close_issuelist'),
+	path('staff-panel/update-task/', staff.update_task, name='update_task'),
 
 	path('issue/create/', issue.create, name='issue-create'),
 	path('issue/list/', issue.list, name='issue-list'),

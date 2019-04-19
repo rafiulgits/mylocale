@@ -9,9 +9,21 @@
 
 
 {% block extra_body %}
+	<h4 align="center">All Tasks</h4>
+	<div class="d-flex justify-content-center container">
+		<div class="task-card" style="padding: 8px; width: 100%">
+				<h3 class="task-title">fhkhas</h3>
+				<p class="task-details">sdfghjkl</p>
+				<a href="#" class="task-see-more btn btn-info btn-sm">See More</a>
+				
+			</div>
 
-	<div class="d-flex justify-content-center">
-		<h4 align="center">All Tasks</h4>
+			<div class="task-card" style="padding: 8px; width: 100%">
+				<h3 class="task-title">fhkhas</h3>
+				<p class="task-details">sdfghjkl</p>
+				<a href="#" class="task-see-more btn btn-info btn-sm">See More</a>
+				
+			</div>
 		{% for item in task_list %}
 			<div class="task-card">
 				<h3 class="task-title">{{ item.title}}</h3>
