@@ -4,33 +4,109 @@
 {% block extra_head %}
 	<title>{{ request.user.name }}</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/account/manage/profile.css' %}">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="{% static 'js/account/manage/profilejs.js' %}"></script>
 {% endblock %}
 
 
 
 {% block extra_body %}
-	<div class="d-flex justify-content-center content">
-		<div class="col-md-6 list-group-item">
-			<div class="image-block">
-				<img src="{{request.user.thumbnail}}">
-			</div>
-			<h6 class="list-group-item">Name: {{ request.user.name }}</h6>
-			<h6 class="list-group-item">NID: {{ request.user.nid }}</h6>
-			<h6 class="list-group-item">Phone: {{ request.user.phone }}</h6>
-			<h6 class="list-group-item">Email: {{ request.user.email }}</h6>
-			{% if request.user.gender == 'M' %}
-				<h6 class="list-group-item">Gender: Male</h6>
-			{% elif request.user.gender == 'F' %}
-				<h6 class="list-group-item">Gender: Female</h6>
-			{% elif request.user.gender == 'O' %}
-				<h6 class="list-group-item">Gender: Other</h6>
-			{% else %}
-				<h6 class="list-group-item">Gender: Not to say</h6>
-			{% endif %}
-			<br>
-			<a href="/account/update/" class="btn btn-success btn-block">Update</a>
-		</div>
-	</div>
+    <div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <img class="card-img-top" src="https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/1441527/1160/772/m1/fpnw/wm0/businessman-avatar-icon-01-.jpg?1468234792&s=e3a468692e15e93a2056bd848193e97a" alt="Card image" style="width:100%">
+        <div class="card-body">
+          <h4 class="card-title">{{ request.user.name.upper }}</h4>
+
+          <div class="list-group list-group-flush " style ="cursor:pointer;">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><i class="fas fa-paper-plane"></i> {{ request.user.email }} </li>
+                {% if request.user.gender == 'M'  %}
+                        <li class="list-group-item"><i class="fas fa-venus-mars"></i> Male</li>
+                    {% elif request.user.gender == 'F' %}
+                        <li class="list-group-item"><i class="fas fa-venus-mars"></i> Female</li>
+
+                    {% elif request.user.gender == 'O' %}
+                        <li class="list-group-item"><i class="fas fa-venus-mars"></i> Other </li>
+
+                    {% elif request.user.gender == '*' %}
+                         <li class="list-group-item"><i class="fas fa-venus-mars"></i> Not to say </li>
+                    {% endif %}
+
+              <li class="list-group-item">><i class="fas fa-phone"></i> {{ request.user.phone }} </li>
+              <li class="list-group-item"><i class="far fa-id-card"></i> {{ request.user.nid }} </li>
+            </ul>
+            <br>
+            <a id="issues-created-by-me" href="#" class="list-group-item list-group-item-action list-group-item-info" onclick="showIssueCreated();"> Issues Created By Me</a>
+            <a id="solved-issues" href="#" class="list-group-item list-group-item-action "> Solved Issues</a>
+            <a id="issues-progressing" href="#" class="list-group-item list-group-item-action" onclick="showIssueProgressing();"> Issues Progressing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+
+        <div class="issues-created-by-me" id="issue-created-by-me-div">
+            {% for issue in issues %}
+                <div class="issue-card">
+                                <h3 class="issue-title">{{ issue.title }}</h3>
+                                <small class="issue-data"><i class="fas fa-user"></i> {{ issue.user }} <i class="fas fa-calendar-alt"></i> {{ issue.time_date }}  <i class="fas fa-map-marker-alt"></i> State of Noakhali</small>
+                                <p class="issue-details">{{ issue.body }}</p>
+                                <a href="#" class="issue-see-more btn btn-info btn-sm">See More</a>
+                                <div class="row issue-interract-buttons">
+                                    <button class="col btn btn-info"><i class="fas fa-heart"></i> Upvote ({{ issue.vote }})</button>
+                                    <button class="col btn btn-info"><i class="fas fa-comment-alt"></i> Comment (23k)</button>
+                                </div>
+                </div><br>
+
+            {% endfor %}
+
+        </div>
+
+
+
+
+    <div class="col-md-8">
+
+        <div class="issues-progressing" id="issue-progressing-div" style="display: none;">
+
+            {% for issue in issues %}
+                {% if issue.in_progress %}
+                    <div class="issue-card">
+                                <h3 class="issue-title">{{ issue.title }}</h3>
+                                <small class="issue-data"><i class="fas fa-user"></i> {{ issue.user }} <i class="fas fa-calendar-alt"></i> {{ issue.time_date }}  <i class="fas fa-map-marker-alt"></i> State of Noakhali</small>
+                                <p class="issue-details">{{ issue.body }}</p>
+                                <a href="#" class="issue-see-more btn btn-info btn-sm">See More</a>
+                                <div class="row issue-interract-buttons">
+                                    <button class="col btn btn-info"><i class="fas fa-heart"></i> Upvote ({{ issue.vote }})</button>
+                                    <button class="col btn btn-info"><i class="fas fa-comment-alt"></i> Comment (23k)</button>
+                                </div>
+                    </div>
+
+                {% endif %}
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+    </div>
+  </div>
+
+
+
+
+</div>
 {% endblock %}
 
 
