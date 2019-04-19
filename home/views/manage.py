@@ -62,20 +62,3 @@ def search(request):
 	return render(request, 'home/manage/search.html', context)
 
 
-
-def test(request):
-	context = {}
-	return render(request, 'home/manage/test.html', context)
-
-
-
-
-
-@login_required(login_url=LOGIN_URL)
-def staff_panel(request):
-	if not request.user.is_staff:
-		return HttpResponse('access denied')
-
-	context = {}
-
-	return render(request, 'home/manage/staff_panel.html', context)
