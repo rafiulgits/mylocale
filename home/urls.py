@@ -6,7 +6,6 @@ from home.views import manage, issue, task, staff
 urlpatterns = [
 
 	path('', manage.index, name='index'),
-	path('test/', manage.test, name='test'),
 
 	path('search/', manage.search, name='search'),
 

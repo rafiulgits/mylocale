@@ -6,10 +6,10 @@ from generic.variables import LOGIN_URL
 from home.models import Task, Issue
 
 
-@login_required(login_url=LOGIN_URL)
+# @login_required(login_url=LOGIN_URL)
 def panel(request):
-	if not request.user.is_staff:
-		return HttpResponse('access denied')
+	# if not request.user.is_staff:
+	# 	return HttpResponse('access denied')
 
 	context = {}
 
@@ -18,22 +18,22 @@ def panel(request):
 
 
 
-@login_required(login_url=LOGIN_URL)
+# @login_required(login_url=LOGIN_URL)
 def open_tasklist(request):
-	if not request.user.is_staff:
-		return HttpResponse('access denied')
+	# if not request.user.is_staff:
+	# 	return HttpResponse('access denied')
 
 	context = {}
 
-	return render(request, 'home/staff/open_tasklist.html', context)
+	return render(request, 'home/staff/opened_tasks.html', context)
 
 
 
 
-@login_required(login_url=LOGIN_URL)
+# @login_required(login_url=LOGIN_URL)
 def close_tasklist(request):
-	if not request.user.is_staff:
-		return HttpResponse('access denied')
+	# if not request.user.is_staff:
+	# 	return HttpResponse('access denied')
 
 	context = {}
 
@@ -41,10 +41,10 @@ def close_tasklist(request):
 
 
 
-@login_required(login_url=LOGIN_URL)
+# @login_required(login_url=LOGIN_URL)
 def open_issuelist(request):
-	if not request.user.is_staff:
-		return HttpResponse('access denied')
+	# if not request.user.is_staff:
+	# 	return HttpResponse('access denied')
 
 	context = {}
 
@@ -52,10 +52,10 @@ def open_issuelist(request):
 
 
 
-@login_required(login_url=LOGIN_URL)
+# @login_required(login_url=LOGIN_URL)
 def progress_issuelist(request):
-	if not request.user.is_staff:
-		return HttpResponse('access denied')
+	# if not request.user.is_staff:
+	# 	return HttpResponse('access denied')
 
 	context = {}
 
@@ -63,10 +63,10 @@ def progress_issuelist(request):
 
 
 
-@login_required(login_url=LOGIN_URL)
+# @login_required(login_url=LOGIN_URL)
 def close_issuelist(request):
-	if not request.user.is_staff:
-		return HttpResponse('access denied')
+	# if not request.user.is_staff:
+	# 	return HttpResponse('access denied')
 
 	context = {}
 
