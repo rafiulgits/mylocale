@@ -7,11 +7,11 @@ from farmer.models import Crop
 
 from generic.variables import LOGIN_URL
 
-def view(request, uid):
+def view(request):
 	try:
-		crop = Crop.objects.get(uid=uid)
+		# crop = Crop.objects.get(uid=uid)
 		context = {}
-		context['crop'] = crop
+		# context['crop'] = crop
 
 		return render(request, 'farmer/crop/view.html', context)
 
