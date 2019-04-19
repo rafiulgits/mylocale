@@ -163,17 +163,9 @@ class UserTaskReportForm(forms.ModelForm):
 		}
 
 
-	def save(self, commit=True):
-		report = super(UserIssueReportForm, self).save(commit=False)
-		report.user = self.user
-		report.task = self.task
-
-		if commit:
-			report.save()
-		return report
-
-
 	def __init__(self, *args, **kwargs):
-		self.user = kwargs.pop('user', None)
-		self.task = kwargs.pop('task', None)
-		super(UserIssueReportForm, self).__init__(*args, **kwargs)
+		self.user_report = kwargs.pop('report_obj', None)
+		super(UserTaskReportForm, self).__init__(*args, **kwargs)
+
+		if self.user_report is not None:
+			self.fields['report'].initial = self.user_report.report

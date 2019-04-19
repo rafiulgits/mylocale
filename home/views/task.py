@@ -7,23 +7,53 @@ from django.shortcuts import render, redirect, HttpResponse
 from generic.variables import LOGIN_URL
 
 from home.models import Task, UserTaskReport
-from home.forms import TaskForm, TaskUpdateForm
+from home.forms import TaskForm, TaskUpdateForm, UserTaskReportForm
 
 
 def view(request,task_id):
 	try:
 		task = Task.objects.get(id=task_id)
 
-		report  = UserTaskReport.objects.filter(task_id=task_id)
+		user_report  = UserTaskReport.objects.filter(task_id=task_id)
 
 		context = {}
 		context['task'] = task
 		context['issue_list'] = task.issues.all()
 
 		if request.user.is_authenticated:
-			user_report = UserTaskReport.objects.filter(user_id=request.user.id).filter(task_id=task_id).first()
-			if user_report:
-				context['user_report'] = True
+			report_obj = UserTaskReport.objects.filter(task_id=task_id, user_id=request.user.id).first()
+			if request.method == 'POST':
+				form = UserTaskReportForm(request.POST, report_obj=report_obj)
+				if form.is_valid():
+					user_report = UserTaskReport(user=request.user, task=task)
+					user_report.report = form.cleaned_data['report']
+					user_report.save()
+					return redirect('/task/'+task_id+'/')
+
+			form = UserTaskReportForm(report_obj=report_obj)
+			context['form'] = form
+
+
+
+		total_satisfied_service = UserTaskReport.objects.filter(task_id=task_id).filter(report='St').count()
+		total_poor_service = UserTaskReport.objects.filter(task_id=task_id).filter(report='Ps').count()
+		total_no_service = UserTaskReport.objects.filter(task_id=task_id).filter(report='Ns').count()
+
+		total = total_satisfied_service+total_poor_service+total_no_service
+
+		if total != 0:
+			satisfied = round(((total_satisfied_service*100)/total),2)
+			poor = round(((total_poor_service*100)/total),2)
+			no = round(((total_no_service*100)/total),2)
+
+		else:
+			satisfied = 0
+			poor = 0
+			no = 0
+
+		context['satisfied'] = satisfied
+		context['poor'] = poor
+		context['no'] = no
 
 
 		return render(request, 'home/task/view.html', context)

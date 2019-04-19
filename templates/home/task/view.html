@@ -14,19 +14,41 @@
 	    <p class="task-details">
 	    	{{ task.description}}
 	    </p>
-	    <div class="task-interraction-buttons">
-		    <button class="btn btn-info"><i class="fas fa-heart"></i> Vallagse</button>
-		    <button class="btn btn-warning"><i class="fas fa-heart-broken"></i> Vallagenai</button>
-		    <button class="btn btn-danger"><i class="fas fa-exclamation-triangle"></i> Kam Shuru Hoy Naikka</button>
-	  	</div>
+	    {% if request.user.is_authenticated %}
+	    	<div class="col-md-5 list-group-item">
+	    		<form method="POST">
+		    		{% csrf_token %}
+		    		{{ form.report }}
+		    		<button class="btn btn-primary">Report</button>
+		    	</form>
+		    	<br>
+		    </div>
+	    {% endif %}
 
-	  	<div class="list-group">
-	  		<h3 align="center">Cover Issue List</h3>
-	  		{% for item in issue_list %}
-	  			<a href="/issue/{{item.uid}}/" class="list-group-item list-group-item-action">{{ item }}</a>
-	   		{% endfor %}	
+	    <div class="d-flex">
+	    	<div class="col-md-5 list-group-item">
+		    	<div class="progress mb-2">
+						<div class="progress-bar bg-success text-dark" style="width:{{satisfied}}%">Satisfied Service {{satisfied}}%</div>
+					</div>
+					<div class="progress mb-2">
+						<div class="progress-bar bg-warning text-dark" style="width:{{poor}}%">Poor Service {{poor}}%</div>
+					</div>
+					<div class="progress mb-2">
+						<div class="progress-bar bg-danger text-dark" style="width:{{no}}%">No Service{{no}}%</div>
+					</div>
+		    	</div>
+		    </div>
+	    </div>
+	    <br>
+
+	  	<div class="d-flex justify-content-center">
+	  		<div class="col-md-6 list-group">
+		  		<h3 align="center">Cover Issue List</h3>
+		  		{% for item in issue_list %}
+		  			<a href="/issue/{{item.uid}}/" class="list-group-item list-group-item-action">{{ item }}</a>
+		   		{% endfor %}	
+		  	</div>
 	  	</div>
-  </div>
 {% endblock %}
 
 
