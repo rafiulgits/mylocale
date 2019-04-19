@@ -93,27 +93,62 @@ class IssueCommentForm(forms.ModelForm):
 
 
 class TaskForm(forms.ModelForm):
-	issues = forms.ModelMultipleChoiceField(queryset=Issue.objects.all())
+
+	class Meta:
+		model = Task
+		fields = ['title','description', 'issues']
+
+
+	def save(self, commit=True):
+		task = super(TaskForm, self).save(commit=True)
+
+		issues = self.cleaned_data['issues']
+		for item in list(issues):
+			task.issues.add(item)
+			item.in_progress = True
+			item.save()
+
+		if commit:
+			task.save()
+		return task
+
+
+
+	def __init__(self, *args, **kwargs):
+		super(TaskForm, self).__init__(*args, **kwargs)
+
+		self.fields['title'].widget = forms.TextInput(attrs=
+				{'class' : 'form-control', 'placeholder' : 'What is your task?'})
+
+		self.fields['description'].widget = forms.Textarea(attrs=
+				{'class' : 'form-control', 
+				'placeholder' : 'Define your task'})
+
+		self.fields['issues'].widget = forms.CheckboxSelectMultiple(attrs={})
+
+		self.fields['issues'].queryset = Issue.objects.filter(is_open=True).filter(in_progress=False)
+
+
+
+class TaskUpdateForm(forms.ModelForm):
 
 	class Meta:
 		model = Task
 		fields = ['title','description']
 
-		widgets = {
-			'title' : forms.TextInput(attrs=
-				{'class' : 'form-control', 'placeholder' : 'What is your task?'}),
-			'description' : forms.Textarea(attrs=
+
+	def __init__(self, *args, **kwargs):
+		self.task = kwargs.pop('task', None)
+		super(TaskUpdateForm, self).__init__(*args, **kwargs)
+
+		self.fields['title'].widget = forms.TextInput(attrs=
+				{'class' : 'form-control', 'placeholder' : 'What is your task?'})
+		self.fields['title'].initial = self.task.title
+
+		self.fields['description'].widget = forms.Textarea(attrs=
 				{'class' : 'form-control', 
 				'placeholder' : 'Define your task'})
-		}
-
-
-
-	def save(self, commit=True):
-		task = super(TaskForm, self).save(commit=False)
-		if commit:
-			task.save()
-		return task
+		self.fields['description'].initial = self.task.description
 
 
 

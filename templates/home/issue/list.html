@@ -9,21 +9,22 @@
 
 
 {% block extra_body %}
-
-	<div class="d-flex justify-content-center">
-		<h4 align="center">All Issues</h4>
-		{% for item in issue_list %}
-			<div class="issue-card">
-				<h3 class="issue-title">{{ item.title}}</h3>
-				<small class="issue-data"><i class="fas fa-user"></i>{{item.user.name}} <i class="fas fa-calendar-alt"></i>{{item.time_date}}<i class="fas fa-map-marker-alt"></i> {{item.address}}</small>
-				<p class="issue-details">{{item.body}}</p>
-				<a href="/issue/{{item.uid}}/" class="issue-see-more btn btn-info btn-sm">See More</a>
-				<div class="row issue-interract-buttons">
-					<button class="col btn btn-info"><i class="fas fa-heart"></i> Upvote (1.2M)</button>
-					<button class="col btn btn-info"><i class="fas fa-comment-alt"></i> Comment (23k)</button>
+	<h4 align="center">All Issues</h4>
+	<div class="container-fluid justify-content-center">
+		<div class="col-md-8">
+			{% for item in issue_list %}
+				<div class="issue-card">
+					<h3 class="issue-title">{{ item.title}}</h3>
+					<small class="issue-data"><i class="fas fa-user"></i>{{item.user.name}} <i class="fas fa-calendar-alt"></i>{{item.time_date}}<i class="fas fa-map-marker-alt"></i> {{item.address}}</small>
+					<p class="issue-details">{{item.body}}</p>
+					<a href="/issue/{{item.uid}}/" class="issue-see-more btn btn-info btn-sm">See More</a>
+					<div class="row issue-interract-buttons">
+						<button class="col btn btn-info"><i class="fas fa-heart"></i> Upvote (1.2M)</button>
+						<button class="col btn btn-info"><i class="fas fa-comment-alt"></i> Comment (23k)</button>
+					</div>
 				</div>
-			</div>
-		{% endfor %}
+			{% endfor %}
+		</div>
 	</div>
 
 {% endblock %}
