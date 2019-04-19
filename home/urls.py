@@ -15,6 +15,7 @@ urlpatterns = [
 	path('staff-panel/open-issuelist/', staff.open_issuelist, name='open_issuelist'),
 	path('staff-panel/progress-issuelist/', staff.progress_issuelist, name='progress_issuelist'),
 	path('staff-panel/close-issuelist/', staff.close_issuelist, name='close_issuelist'),
+	path('staff-panel/update-task/', staff.update_task, name='update_task'),
 
 	path('issue/create/', issue.create, name='issue-create'),
 	path('issue/list/', issue.list, name='issue-list'),
@@ -25,4 +26,7 @@ urlpatterns = [
 	path('task/create/', task.create, name='task-create'),
 	path('task/list/', task.list, name='task-list'),
 	path('task/<task_id>/', task.view, name='task-view'),
+	path('task/<task_id>/update/', task.update, name='task update'),
+	path('task/<task_id>/close/', task.close, name='task-close'),
+	path('task/<task_id>/reopen/', task.reopen, name='task-reopen'),
 ]

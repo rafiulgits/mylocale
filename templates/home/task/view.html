@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block extra_head %}
-	<title>task: Bridge Vainga Geche</title>
+	<title>{{ task.title }}</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/home/task/view.css' %}">
 {% endblock %}
 
@@ -10,42 +10,53 @@
 
 {% block extra_body %}
 	<div class="container">
-	    <h1 class="task-title">Rastay Gorto <span class="badge badge-pill badge-info b">Processing</span></h1>
-	    <img class="task-image" src="https://previews.123rf.com/images/louisstang/louisstang1407/louisstang140700002/30191246-damaged-road.jpg" alt="task Image">
+	    <h1 class="task-title">{{ task.title }}
+	    	{% if task.is_running %}
+	    		<span class="badge badge-pill badge-info b">Processing</span>
+	    		<a href="/task/{{task.id}}/close/" class="btn btn-outline-danger">Make Close</a>
+	    	{% else %}
+	    		<span class="badge badge-pill badge-danger b">Closed</span>
+	    		<a href="/task/{{task.id}}/reopen/" class="btn btn-outline-success">Re Open</a>
+	    	{% endif %}
+	    </h1>
 	    <p class="task-details">
-		    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		    <br>
-		    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	    	{{ task.description}}
 	    </p>
-	    <div class="task-interraction-buttons">
-		    <button class="btn btn-info"><i class="fas fa-heart"></i> Vallagse</button>
-		    <button class="btn btn-warning"><i class="fas fa-heart-broken"></i> Vallagenai</button>
-		    <button class="btn btn-danger"><i class="fas fa-exclamation-triangle"></i> Kam Shuru Hoy Naikka</button>
-	  	</div>
-	    <form action="">
-		    <div class="input-group mb-3">
-			    <textarea class="form-control" placeholder="Add Comment"></textarea>
-			    <div class="input-group-append">
-		        	<button class="btn btn-info">Submit</button>
-		      	</div>
+	    {% if request.user.is_authenticated %}
+	    	<div class="col-md-5 list-group-item">
+	    		<form method="POST">
+		    		{% csrf_token %}
+		    		{{ form.report }}
+		    		<button class="btn btn-primary">Report</button>
+		    	</form>
+		    	<br>
 		    </div>
-	  </form>
-	  <div class="comments">
-		  	<img class="user-picture rounded-circle" src="https://avatars3.githubusercontent.com/u/3599324?s=400&v=4" alt="person"width="60px"height="60px" style="display:inline-block">
-		  	<h5 style="display:inline-block;"> Person <br><small>Date | Time</small></h5>
-		  	<p class="comment-text">  Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-	  </div>
-  </div>
+	    {% endif %}
+
+	    <div class="d-flex">
+	    	<div class="col-md-5 list-group-item">
+		    	<div class="progress mb-2">
+						<div class="progress-bar bg-success text-dark" style="width:{{satisfied}}%">Satisfied Service {{satisfied}}%</div>
+					</div>
+					<div class="progress mb-2">
+						<div class="progress-bar bg-warning text-dark" style="width:{{poor}}%">Poor Service {{poor}}%</div>
+					</div>
+					<div class="progress mb-2">
+						<div class="progress-bar bg-danger text-dark" style="width:{{no}}%">No Service{{no}}%</div>
+					</div>
+		    	</div>
+		    </div>
+	    </div>
+	    <br>
+
+	  	<div class="d-flex justify-content-center">
+	  		<div class="col-md-6 list-group">
+		  		<h3 align="center">Cover Issue List</h3>
+		  		{% for item in issue_list %}
+		  			<a href="/issue/{{item.uid}}/" class="list-group-item list-group-item-action">{{ item }}</a>
+		   		{% endfor %}	
+		  	</div>
+	  	</div>
 {% endblock %}
 
 

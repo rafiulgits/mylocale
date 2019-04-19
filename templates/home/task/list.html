@@ -1,12 +1,26 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block extra_head %}
 	<title>Task List</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/home/manage/index.css' %}">
 {% endblock %}
 
 
 
 {% block extra_body %}
+	<h4 align="center">All Tasks</h4>
+
+	<div class="d-flex justify-content-center">
+
+		{% for item in task_list %}
+			<div class="task-card" style="padding: 10px;">
+				<h3 class="task-title">{{ item.title}}</h3>
+				<p class="task-details">{{item.body}}</p>
+				<a href="/task/{{item.id}}/" class="task-see-more btn btn-info btn-sm">See More</a>
+			</div>
+		{% endfor %}
+	</div>
 
 {% endblock %}
 

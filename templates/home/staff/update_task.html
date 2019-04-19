@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block extra_head %}
+	<title>Update Task</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/home/staff/update_task.css' %}">
+{% endblock %}
+
+
+
+{% block extra_body %}
+
+	<div class="container" style="margin-top: 30px;">
+		<div class="row">
+			<div class="col-md-6">
+				
+				<div class="box remove-box">
+					<h3 style="text-align: center; border-bottom: 1px solid #DDDFE2; padding-bottom: 20px; margin-bottom: 20px;">Remove Issues From Task</h3>
+
+					<p><a href="#"><i class="fas fa-times" style="margin-right: 10px"></i></a> Bla Bla Bla</p>
+					<p><a href="#"><i class="fas fa-times" style="margin-right: 10px"></i></a> Bla Bla Bla</p>
+					<p><a href="#"><i class="fas fa-times" style="margin-right: 10px"></i></a> Bla Bla Bla</p>
+				</div>
+
+			</div>
+
+			<div class="col-md-6">
+
+				<div class="box remove-box">
+					<h3 style="text-align: center; border-bottom: 1px solid #DDDFE2; padding-bottom: 20px; margin-bottom: 20px;">Add Issues To Task</h3>
+
+					<form>
+						<input type="checkbox" name="issue-1" id="issue4">
+						<label for="issue4" style="margin-left: 10px;">Blablabla</label>
+						<br>
+						<input type="checkbox" name="issue-1" id="issue5">
+						<label for="issue5" style="margin-left: 10px;">Blablabla</label>
+						<br>
+						<input type="checkbox" name="issue-1" id="issue6">
+						<label for="issue6" style="margin-left: 10px;">Blablabla</label>
+					</form>
+					<a href="#" class="btn btn-success mt-2">Submit</a>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+
+
+{% block extra_script %}
+
+{% endblock %}
