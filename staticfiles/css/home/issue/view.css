@@ -45,3 +45,43 @@
 .media-block img {
 	max-height: 500px; object-fit: cover; width: auto; margin-left: auto; margin-right: auto;
 }
+
+.crud-button {
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	z-index: 100;
+}
+
+.crud-button .btn {
+	padding: 0;
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+	line-height: 50px;
+	flex-shrink: 40px;
+}
+.delete-box {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: #FFB6C1;
+	border: 1px solid #FFC0CB;
+	border-radius: 5px;
+	padding: 40px;
+
+}
+.delete-warning-text{
+	margin-right: 20px;
+}
+.delete-box-wrapper {
+	display: none;
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	top: 0;
+	left: 0;
+	background: #00000099;
+
+}
