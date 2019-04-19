@@ -63,11 +63,4 @@ def search(request):
 
 
 
-@login_required(login_url=LOGIN_URL)
-def staff_panel(request):
-	if not request.user.is_staff:
-		return HttpResponse('access denied')
 
-	context = {}
-
-	return render(request, 'home/manage/staff_panel.html', context)
