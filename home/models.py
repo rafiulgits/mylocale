@@ -22,6 +22,9 @@ class Issue(models.Model):
 	media = models.ImageField(upload_to=ISSUE_IMAGE_DIR, blank=True, null=True)
 	vote = models.PositiveIntegerField(default=0)
 
+	def __str__(self):
+		return self.title + ' : ' + self.address
+
 
 
 class IssueComment(models.Model):
@@ -45,6 +48,9 @@ class Task(models.Model):
 	time_date = models.DateTimeField(auto_now_add=True)
 	is_running = models.BooleanField(default=True)
 	issues = models.ManyToManyField(Issue)
+
+	def __str__(self):
+		return self.title
 
 
 

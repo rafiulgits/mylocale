@@ -17,7 +17,7 @@
   <div class="row">
     <div class="col-md-4">
       <div class="card">
-        <img class="card-img-top" src="https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/1441527/1160/772/m1/fpnw/wm0/businessman-avatar-icon-01-.jpg?1468234792&s=e3a468692e15e93a2056bd848193e97a" alt="Card image" style="width:100%">
+        <img class="card-img-top" src="{{request.user.thumbnail}}" alt="Card image" style="width:100%; padding: 10px;">
         <div class="card-body">
           <h4 class="card-title">{{ request.user.name.upper }}</h4>
 
@@ -36,7 +36,7 @@
                          <li class="list-group-item"><i class="fas fa-venus-mars"></i> Not to say </li>
                     {% endif %}
 
-              <li class="list-group-item">><i class="fas fa-phone"></i> {{ request.user.phone }} </li>
+              <li class="list-group-item"><i class="fas fa-phone"></i> {{ request.user.phone }} </li>
               <li class="list-group-item"><i class="far fa-id-card"></i> {{ request.user.nid }} </li>
             </ul>
             <br>

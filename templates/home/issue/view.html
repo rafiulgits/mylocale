@@ -32,7 +32,16 @@
 	{% endif %}
 	<div class="container">
 	    <h1 class="issue-title">{{issue.title}}</h1>
-	    <small class="issue-data"><i class="fas fa-user"></i>{{issue.user.name}} <i class="fas fa-calendar-alt"></i>{{issue.time_date}}<i class="fas fa-map-marker-alt"></i>{{issue.address}}</small>
+	    {% if issue.is_open %}
+	    	<small>Open</small>
+	    	{% if issue.in_progress %}
+	    		<small>| In Progress</small>
+	    	{% endif %}
+	    {% else %}
+	    	<small>Closed</small>
+	    {% endif%}
+	    <small class="issue-data"><i class="fas fa-user"></i> {{issue.user.name}}  <i class="fas fa-calendar-alt"></i>
+	    	{{issue.time_date}}  <i class="fas fa-map-marker-alt"></i> {{issue.address}}  </small>
 	    <div class="media-block">
 	    	<img class="issue-image" src="/{{issue.media}}" alt="Issue Image">
 	    </div>

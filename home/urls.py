@@ -26,4 +26,7 @@ urlpatterns = [
 	path('task/create/', task.create, name='task-create'),
 	path('task/list/', task.list, name='task-list'),
 	path('task/<task_id>/', task.view, name='task-view'),
+	path('task/<task_id>/update/', task.update, name='task update'),
+	path('task/<task_id>/close/', task.close, name='task-close'),
+	path('task/<task_id>/reopen/', task.reopen, name='task-reopen'),
 ]
