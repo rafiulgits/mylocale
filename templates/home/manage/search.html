@@ -25,11 +25,32 @@
 	<h4 align="center">Task Result</h4>
 	{% for item in task_result %}
 
+		<div class="task-card">
+			<h3 class="task-title">{{ item.title }}</h3>
+			<p class="task-details">{{ item.body }}</p>
+			<a href="/task/{{ item.task_id}}" class="task-see-more btn btn-info btn-sm">See More</a>
+			<div class="row task-interract-buttons">
+				<button class="col btn btn-info"><i class="fas fa-heart"></i> Upvote ({{ item.vote }})</button>
+				<button class="col btn btn-info"><i class="fas fa-comment-alt"></i> Comment (23k)</button>
+			</div>
+		</div>
+
 	{% endfor %}
 	<br>
 
 	<h4 align="center">Crop Result</h4>
 	{% for item in crop_result %}
+
+		<div class="col-sm-12 col-lg-4 col-md-6">
+            <div class="card">
+                <img class="card-img-top" src="/{{item.media}}" alt="Card image" style="width:100%">
+                <div class="card-body">
+                    <h4 class="card-title">{{item.name}}</h4>
+                    <p class="card-text">Category : {{ item.category | cat }}</p>
+                    <a href="/agriculture/crop/{{item.uid}}/" class="btn btn-primary">See Article</a>
+                </div>
+            </div>
+        </div>
 
 	{% endfor %}
 	<br>
