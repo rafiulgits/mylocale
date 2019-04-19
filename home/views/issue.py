@@ -1,3 +1,5 @@
+from api.tokenization import encode as token_encode
+
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect, HttpResponse
@@ -8,15 +10,15 @@ from home.models import Issue, IssueComment, IssueVote
 from home.forms import IssueForm, IssueCommentForm
 
 
-def view(request):
+def view(request, uid):
 	try:
 		context = {}
 
-		# issue = Issue.objects.get(uid=uid)
-		# comments = IssueComment.objects.filter(issue_id=uid)
+		issue = Issue.objects.get(uid=uid)
+		comments = IssueComment.objects.filter(issue_id=uid)
 
-		# context['issue'] = issue
-		# context['comments'] = comments
+		context['issue'] = issue
+		context['comments'] = comments
 
 		return render(request, 'home/issue/view.html', context)
 
@@ -29,7 +31,20 @@ def view(request):
 def create(request):
 	if request.user.is_staff:
 		return HttpResponse('You are not allowed to create issue')
+
+
+	if request.method == 'POST':
+		form = IssueForm(request.POST, request.FILES, user=request.user)
+		if form.is_valid():
+			issue = form.save()
+			return redirect('/issue/'+str(issue.uid)+'/')
+
+		else:
+			print(form.errors)
+
+	token = token_encode({'user_id' : request.user.id })
 	context = {}
+	context['token'] = token
 	
 
 	form = IssueForm()
