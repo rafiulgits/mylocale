@@ -17,25 +17,7 @@ class CropForm(forms.ModelForm):
 			'description':forms.Textarea(attrs=
 				{'class':'form-control', 
 				'placeholder': 'Description about mango'}),
-
-			'media':forms.FileInput(attrs=
-				{'class':'form-control'})
 		}
-
-
-	def save(self, commit=True):
-		crop = super(CropForm, self).save(commit=False)
-		crop.user = self.user
-		if commit:
-			crop.save()
-
-		return crop
-
-
-
-	def __init__(self, *args, **kwargs):
-		self.user = kwargs.pop('user', None)
-		super(CropForm, self).__init__(*args, **kwargs)
 
 
 

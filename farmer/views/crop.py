@@ -4,6 +4,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect, Http404
 
 from farmer.models import Crop
+from farmer.forms import CropForm
 
 from generic.variables import LOGIN_URL
 
@@ -34,6 +35,23 @@ def list(request):
 def create(request):
 	if not request.user.is_staff:
 		return Http404('access denied')
+
+	if request.method == 'POST':
+		form = CropForm(request.POST, request.FILES)
+		if form.is_valid():
+			crop = Crop(user=request.user)
+			crop.category = form.cleaned_data['category']
+			crop.name = form.cleaned_data['name']
+			crop.description = form.cleaned_data['description']
+			crop.media = form.cleaned_data['media']
+
+			crop.save()
+
+			return redirect('/agriculture/crop/'+str(crop.uid)+'/')
+		else:
+			print('form is not valid')
+			print(form.errors)
+
 
 	form = CropForm()
 	context = {}
