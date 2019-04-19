@@ -39,7 +39,7 @@ class IssueUpdateForm(forms.ModelForm):
 
 	class Meta:
 		model = Issue
-		fields = ['title', 'body', 'media', 'address']
+		fields = ['title', 'body', 'address']
 
 		widgets = {
 			'title' : forms.TextInput(attrs=
@@ -53,10 +53,12 @@ class IssueUpdateForm(forms.ModelForm):
 
 	def __init__(self, *args,**kwargs):
 		self.issue = kwargs.pop('issue', None)
+		super(IssueUpdateForm, self).__init__(*args, **kwargs)
 		if self.issue:
 			self.fields['title'].initial = self.issue.title
 			self.fields['body'].initial = self.issue.body
 			self.fields['address'].initial = self.issue.address
+
 
 
 

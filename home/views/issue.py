@@ -30,24 +30,26 @@ def view(request, uid):
 			else:
 				context['has_vote'] = False
 
-			vote = request.GET.get('vote', None)
-			unvote = request.GET.get('unvote', None)
-			if vote:
-				if user_vote is None:
-					IssueVote.objects.create(user=request.user, issue=issue)
-					issue.vote += 1
-					issue.save()
 
-				context['has_vote'] = True
+			if request.user != issue.user:
+				vote = request.GET.get('vote', None)
+				unvote = request.GET.get('unvote', None)
+				if vote:
+					if user_vote is None:
+						IssueVote.objects.create(user=request.user, issue=issue)
+						issue.vote += 1
+						issue.save()
+
+					context['has_vote'] = True
 
 
-			elif unvote:
-				if user_vote:
-					user_vote.delete()
-					issue.vote -= 1
-					issue.save()
+				elif unvote:
+					if user_vote:
+						user_vote.delete()
+						issue.vote -= 1
+						issue.save()
 
-				context['has_vote'] = False
+					context['has_vote'] = False
 
 		comments = IssueComment.objects.filter(issue_id=uid).order_by('-time_date')
 
@@ -109,7 +111,7 @@ def delete(request, uid):
 
 			issue.delete()
 
-			return redirect('/issue/all/')
+			return redirect('/issue/list/')
 	except ObjectDoesNotExist as e:
 		pass
 
@@ -131,6 +133,11 @@ def update(request, uid):
 					issue.address = form.cleaned_data['address']
 
 					issue.save()
+
+					return redirect('/issue/'+uid+'/')
+
+				else:
+					print(form.errors)
 
 
 			form = IssueUpdateForm(issue=issue)
