@@ -10,7 +10,9 @@
 
 {% block extra_body %}
 	<h4 align="center">All Tasks</h4>
+
 	<div class="d-flex justify-content-center">
+
 		{% for item in task_list %}
 			<div class="task-card" style="padding: 10px;">
 				<h3 class="task-title">{{ item.title}}</h3>

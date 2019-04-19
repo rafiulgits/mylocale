@@ -71,3 +71,8 @@ def close_issuelist(request):
 	context = {}
 
 	return render(request, 'home/staff/close_issuelist.html', context)
+
+def update_task(request):
+	context = {}
+
+	return render(request, 'home/staff/update_task.html', context)
