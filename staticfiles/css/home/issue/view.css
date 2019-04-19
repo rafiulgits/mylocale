@@ -37,3 +37,11 @@
 	padding-right: 10px;
 	
 }
+
+.media-block {
+	width: 80%; margin-left: auto; margin-right: auto; justify-content: center; align-items: center;
+}
+
+.media-block img {
+	max-height: 500px; object-fit: cover; width: auto; margin-left: auto; margin-right: auto;
+}

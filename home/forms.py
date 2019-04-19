@@ -35,6 +35,31 @@ class IssueForm(forms.ModelForm):
 		super(IssueForm, self).__init__(*args, **kwargs)
 
 
+class IssueUpdateForm(forms.ModelForm):
+
+	class Meta:
+		model = Issue
+		fields = ['title', 'body', 'media', 'address']
+
+		widgets = {
+			'title' : forms.TextInput(attrs=
+				{'class' : 'form-control', 'placeholder' : 'Broken Roard'}),
+			'body' : forms.Textarea(attrs=
+				{'class' : 'form-control', 'placeholder' : 'Issue Description'}),
+			'address' : forms.TextInput(attrs=
+				{'class' : 'form-control'})
+		}
+
+
+	def __init__(self, *args,**kwargs):
+		self.issue = kwargs.pop('issue', None)
+		if self.issue:
+			self.fields['title'].initial = self.issue.title
+			self.fields['body'].initial = self.issue.body
+			self.fields['address'].initial = self.issue.address
+
+
+
 
 class IssueCommentForm(forms.ModelForm):
 	class Meta:
@@ -52,9 +77,9 @@ class IssueCommentForm(forms.ModelForm):
 		comment.user = self.user
 		comment.issue = self.issue
 		if commit:
-			issue.save()
+			comment.save()
 
-		return issue
+		return comment
 
 
 	def __init__(self, *args, **kwargs):

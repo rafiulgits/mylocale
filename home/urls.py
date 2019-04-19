@@ -19,7 +19,8 @@ urlpatterns = [
 	path('issue/create/', issue.create, name='issue-create'),
 	path('issue/list/', issue.list, name='issue-list'),
 	path('issue/<uid>/', issue.view, name='issue-view'),
-
+	path('issue/<uid>/delete/', issue.delete, name='issue-delete'),
+	path('issue/<uid>/update/', issue.delete, name='issue-update'),
 
 	path('task/create/', task.create, name='task-create'),
 	path('task/list/', task.list, name='task-list'),

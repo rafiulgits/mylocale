@@ -9,30 +9,41 @@
 
 
 {% block extra_body %}
+	<div class="d-flex justify-content-center">
+		<a href="/issue/{{issue.uid}}/update/" class="btn btn-primary">Update</a>
+		<a href="/issue/{{issue.uid}}/delete/" class="btn btn-danger">Delete</a>
+	</div>
 	<div class="container">
 	    <h1 class="issue-title">{{issue.title}}</h1>
 	    <small class="issue-data"><i class="fas fa-user"></i>{{issue.user.name}} <i class="fas fa-calendar-alt"></i>{{issue.time_date}}<i class="fas fa-map-marker-alt"></i>{{issue.address}}</small>
-	    <img class="issue-image" src="/{{issue.media}}" alt="Issue Image">
+	    <div class="media-block">
+	    	<img class="issue-image" src="/{{issue.media}}" alt="Issue Image">
+	    </div>
 	    <p class="issue-details">
 		    {{ issue.body | linebreaks}}
 	    </p>
-	    <div class="issue-interraction-buttons">
-		    <button class="btn btn-info"><i class="fas fa-heart"></i> Upvote (1.2M)</button>
-		    <button class="btn btn-danger"><i class="fas fa-flag"></i> Flag</button>
+	    <div class="issue-interraction-buttons" id="voot-block">
+	    	<button class="btn btn-info disabled">{{issue.vote}}</button>
+	    	{% if request.user.is_authenticated %}
+	    		{% if has_vote%}
+	    			<a class="btn btn-info" href="/issue/{{issue.uid}}/?unvote=unvote"><i class="fas fa-heart"></i>Remove Vote</a>
+	    		{% else %}
+	    			<a class="btn btn-info" href="/issue/{{issue.uid}}/?vote=vote"><i class="fas fa-heart"></i> Vote</a>
+	    		{% endif %}
+	    	{% endif %}
 	  	</div>
-	    <form action="/action_page.php">
-		    <div class="input-group mb-3">
-			    <textarea class="form-control" placeholder="Add Comment"></textarea>
-			    <div class="input-group-append">
-		        	<button class="btn btn-info">Submit</button>
-		      	</div>
-		    </div>
-	  </form>
-	  <div class="comments">
-		  	<img class="user-picture" src="https://avatars3.githubusercontent.com/u/3599324?s=400&v=4" alt="person"width="60px"height="60px" style="display:inline-block">
-		  	<h5 style="display:inline-block;"> Person <br><small>Date | Time</small></h5>
-		  	<p class="comment-text">  Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-	  </div>
+	    <form method="POST" class="list-group-item" id="form-block">
+		    {% csrf_token %}
+		    {{ form.body }}
+		    <button class="btn btn-success">Comment</button>
+	  	</form>
+	  	{% for item in comments %}
+	  		<div class="comments list-group-item">
+			  	<img class="user-picture" src="{{item.user.thumbnail}}" alt="person" width="30px" height="30px" style="display:inline-block; float: left; margin-right: 5px;">
+			  	<h5 style="display:inline-block;">{{item.user.name}}<br><small>{{item.time_date}}</small></h5>
+			  	<p class="comment-text">{{item.body}}</p>
+			</div>
+	  	{% endfor %}
   </div>
 {% endblock %}
 
