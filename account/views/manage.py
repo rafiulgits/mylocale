@@ -6,14 +6,18 @@ from django.shortcuts import render, redirect, HttpResponse
 
 from generic.variables import LOGIN_URL
 
+from home.models import Issue
+
 
 
 @login_required(login_url=LOGIN_URL)
 def profile(request):
 	context = {}
 	user = request.user
+	issues = Issue.objects.filter(user_id=user.id)
+	context['issues'] = issues
 
-	return render(request, 'account/profile/view.html',context)
+	return render(request, 'account/manage/profile.html',context)
 
 
 @login_required(login_url=LOGIN_URL)
@@ -33,5 +37,4 @@ def update(request):
 
 	context['form'] = form
 
-	return render(request, 'account/profile/update.html', context)
-
+	return render(request, 'account/manage/update.html', context)

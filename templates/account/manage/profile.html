@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+	<title>{{ request.user.name }}</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/account/manage/profile.css' %}">
+{% endblock %}
+
+
+
+{% block extra_body %}
+	<div class="d-flex justify-content-center content">
+		<div class="col-md-6 list-group-item">
+			<div class="image-block">
+				<img src="{{request.user.thumbnail}}">
+			</div>
+			<h6 class="list-group-item">Name: {{ request.user.name }}</h6>
+			<h6 class="list-group-item">NID: {{ request.user.nid }}</h6>
+			<h6 class="list-group-item">Phone: {{ request.user.phone }}</h6>
+			<h6 class="list-group-item">Email: {{ request.user.email }}</h6>
+			{% if request.user.gender == 'M' %}
+				<h6 class="list-group-item">Gender: Male</h6>
+			{% elif request.user.gender == 'F' %}
+				<h6 class="list-group-item">Gender: Female</h6>
+			{% elif request.user.gender == 'O' %}
+				<h6 class="list-group-item">Gender: Other</h6>
+			{% else %}
+				<h6 class="list-group-item">Gender: Not to say</h6>
+			{% endif %}
+			<br>
+			<a href="/account/update/" class="btn btn-success btn-block">Update</a>
+		</div>
+	</div>
+{% endblock %}
+
+
+
+{% block extra_script %}
+
+{% endblock %}

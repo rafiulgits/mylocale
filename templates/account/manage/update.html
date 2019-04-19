@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+
+
+{% block extra_body %}
+	<div class="d-flex justify-content-center">
+		<div class="col-md-6">
+			{% if messages %}
+                {% for message in messages %}
+                    <p class="list-group-item">{{message}}</p>
+                {% endfor %}
+            {% endif %}
+			<form method="POST">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<button type="submit" class="btn btn-success">Update</button>
+			</form>
+		</div>
+	</div>
+{% endblock %}
+
+
+
+{% block extra_script %}
+
+{% endblock %}

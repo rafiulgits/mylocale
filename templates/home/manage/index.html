@@ -3,6 +3,7 @@
 
 {% block extra_head %}
 	<link rel="stylesheet" type="text/css" href="{% static 'css/home/manage/index.css' %}">
+	<title>My Locale</title>
 {% endblock %}
 
 
@@ -68,7 +69,7 @@
 				</div>
 			</div>
 			<div class="col-md-4">
-				<button class="btn btn-success create-issue" style="width: 100%; height: 100px;">Create An Issue</button>
+				<a class="btn btn-success create-issue" href="/issue/create/" style="width: 100%; font-size: 25px; line-height: 75px; height: 100px;">Create An Issue</a>
 
 				<div class="my-issues sidenav-card">
 					<h4 class="my-issues-title sidenav-title">Your Issues</h4>

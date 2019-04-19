@@ -40,10 +40,10 @@ def signin(request):
 	if request.method == 'POST':
 		form = SigninForm(request.POST)
 		if form.is_valid():
-			phone = form.cleaned_data['phone']
+			nid = form.cleaned_data['nid']
 			password = form.cleaned_data['password']
 
-			user = authenticate(phone=phone, password=password)
+			user = authenticate(nid=nid, password=password)
 
 			if user is not None:
 				if(not user.is_active):

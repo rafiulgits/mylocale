@@ -7,6 +7,8 @@ urlpatterns = [
 
 	path('', manage.index, name='index'),
 
+	path('search/', manage.search, name='search'),
+
 	path('issue/create/', issue.create, name='issue-create'),
 	path('issue/list/', issue.list, name='issue-list'),
 	path('issue/<uid>/', issue.view, name='issue-view'),

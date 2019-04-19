@@ -20,7 +20,7 @@ class SignupForm(forms.ModelForm):
 				}),
 
 			'phone' : forms.TextInput(attrs={
-				'placeholder' : 'Phone', 'class' : 'form-control','maxLength':'11'
+				'placeholder' : 'Phone', 'class' : 'form-control','maxLength':'11',
 				}),
 
 			'email' : forms.EmailInput(attrs={
@@ -33,7 +33,7 @@ class SignupForm(forms.ModelForm):
 
 			'nid' : forms.TextInput(attrs={
 				'class' : 'form-control', 'placeholder' : 'National ID', 
-				'maxLength':'17'
+				'maxLength':'17', 'minLength': '11'
 				})
 		}
 
@@ -95,7 +95,7 @@ class SigninForm(forms.ModelForm):
 		widgets = {
 			'nid' : forms.TextInput(attrs={
 				'class':'form-control', 'placeholder' : 'National ID', 
-				'maxLength':'17'
+				'maxLength':'17', 'minLength' : '11'
 				})
 		}
 
@@ -157,16 +157,15 @@ class ProfileUpdateForm(forms.ModelForm):
 
 		if email == self.user.email:
 			return email
-
-		query = Account.objects.filter(email=email)
-
-		if query.exists():
-			print(email)
-			print(query)
-			print('ValidationError')
+		
+		query = Account.objects.filter(email=email).first()
+		if query:
 			raise forms.ValidationError('this email already taken')
 
 		return email
+
+
+
 
 	def __init__(self, *args, **kwargs):
 		self.user = kwargs.pop('user', None)
