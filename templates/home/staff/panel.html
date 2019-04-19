@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block extra_head %}
+	<title>Staff Panel</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/home/staff/panel.css' %}">
+{% endblock %}
+
+
+
+{% block extra_body %}
+	<!-- current running task
+	progress issue
+
+	new opened issue
+	new opened issue list on a map
+
+
+	closed tasklist
+	closed issuelist -->
+
+	<div class="container">
+		<div class="row panel-row">
+			<div class="col-md-6">
+				<div class="list-group">
+
+					<a href="#" class="list-group-item list-group-item-action list-group-item-primary disabled" style="text-align: center; font-weight: bold;">Current Running Tasks</a>
+					<a href="#" class="list-group-item list-group-item-action">Khamba Vainga Porse</a>
+					<a href="#" class="list-group-item list-group-item-action">Khamba Vainga Porse</a>
+					<a href="#" class="list-group-item list-group-item-action">Khamba Vainga Porse</a>
+					<a href="#" class="list-group-item list-group-item-action">Khamba Vainga Porse</a>
+					<a href="/staff-panel/opened-tasklist/" class="list-group-item list-group-item-action list-group-item-primary">See More</a>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="list-group">
+
+					<a href="#" class="list-group-item list-group-item-action list-group-item-primary disabled" style="text-align: center; font-weight: bold;">Progress Issue</a>
+					<a href="#" class="list-group-item list-group-item-action">Dustbin Ultay Gese</a>
+					<a href="#" class="list-group-item list-group-item-action">Dustbin Ultay Gese</a>
+					<a href="#" class="list-group-item list-group-item-action">Dustbin Ultay Gese</a>
+					<a href="#" class="list-group-item list-group-item-action">Dustbin Ultay Gese</a>
+					<a href="/staff-panel/progress-issuelist//" class="list-group-item list-group-item-action list-group-item-primary">See More</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="list-group">
+
+					<a href="#" class="list-group-item list-group-item-action list-group-item-primary disabled" style="text-align: center; font-weight: bold;">Recently Opened Issues</a>
+					<a href="#" class="list-group-item list-group-item-action">Dakat Baira Gese</a>
+					<a href="#" class="list-group-item list-group-item-action">Dakat Baira Gese</a>
+					<a href="#" class="list-group-item list-group-item-action">Dakat Baira Gese</a>
+					<a href="#" class="list-group-item list-group-item-action">Dakat Baira Gese</a>
+					<a href="/staff-panel/open-issuelist/" class="list-group-item list-group-item-action list-group-item-primary">See More</a>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div id="map"></div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="list-group">
+
+					<a href="#" class="list-group-item list-group-item-action list-group-item-primary disabled" style="text-align: center; font-weight: bold;">Closed Issues</a>
+					<a href="#" class="list-group-item list-group-item-action">Bou Moira Geche</a>
+					<a href="#" class="list-group-item list-group-item-action">Bou Moira Geche</a>
+					<a href="#" class="list-group-item list-group-item-action">Bou Moira Geche</a>
+					<a href="#" class="list-group-item list-group-item-action">Bou Moira Geche</a>
+					<a href="/staff-panel/close-issuelist/" class="list-group-item list-group-item-action list-group-item-primary">See More</a>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="list-group">
+
+					<a href="#" class="list-group-item list-group-item-action list-group-item-primary disabled" style="text-align: center; font-weight: bold;">Closed Tasks</a>
+					<a href="#" class="list-group-item list-group-item-action">Girlfriend Haray geche</a>
+					<a href="#" class="list-group-item list-group-item-action">Girlfriend Haray geche</a>
+					<a href="#" class="list-group-item list-group-item-action">Girlfriend Haray geche</a>
+					<a href="#" class="list-group-item list-group-item-action">Girlfriend Haray geche</a>
+					<a href="/staff-panel/closed-tasklist/" class="list-group-item list-group-item-action list-group-item-primary">See More</a>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+
+
+{% block extra_script %}
+
+<script type="text/javascript">
+        var head = document.getElementsByTagName('head')[0];
+
+        var insertBefore = head.insertBefore;
+
+        head.insertBefore = function (newElement, referenceElement) {
+
+            if (newElement.href && newElement.href.indexOf('//fonts.googleapis.com/css?family=Roboto') > -1) {
+
+                console.info('Prevented Roboto from loading!');
+                return;
+            }
+
+            insertBefore.call(head, newElement, referenceElement);
+        };
+
+        var map;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {
+                    lat: 40,
+                    lng: 50
+                },
+                zoom: 4,
+                mapTypeId: 'roadmap'
+            });
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var currentPosition = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    }
+                    map.setCenter(currentPosition);
+                    map.setZoom(14);
+                    var marker = new google.maps.Marker({
+                        position: currentPosition,
+                        map: map,
+                        title: 'Here you are!'
+                    });
+                    
+                });
+            } else {
+                console.log("Your browser is backdated!");
+            }
+        }
+    </script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkdvxKnpY6ToyVSUHh4QxC1cYs7hmODKE&callback=initMap"async defer></script>
+
+{% endblock %}

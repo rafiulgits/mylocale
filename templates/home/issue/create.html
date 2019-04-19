@@ -1,17 +1,78 @@
 {% extends 'base.html' %}
+{% load staticfiles	 %}
 
 {% block extra_head %}
 	<title>Create Issue</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/home/issue/create.css' %}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		var address;
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position){
+				$.getJSON('https://nominatim.openstreetmap.org/reverse?format=json&lat=' + position.coords.latitude +'&lon=' + position.coords.longitude +'&zoom=14&addressdetails=1',
+					function(addr) {
+						address = addr.address;
+						var loc = address.locality + ', ' + address.city;
+						document.getElementById('id_address').value = loc;
+						if (address.city=="Sylhet") {
+							document.getElementById('local-issues').style.display = 'block'
+						}
+					}
+					);
+			});
+		}
+
+		function checkLocation() {
+			if (typeof address.city == 'undefined') {
+				document.getElementById('error-message').innerHTML = "<h3>Sorry! Couldn't get your location data!</h3>"
+				document.getElementById('error-message').style.display = 'block';
+			} else if (address.city=="Sylhet") {
+				window.location.href = "/";
+			} else {
+				document.getElementById('error-message').style.display = 'block';
+			}
+		}
+	</script>
 {% endblock %}
 
 
-
 {% block extra_body %}
+
+	<div class="d-flex justify-content-center">
+		<div class="col-md-6">
+			<form method="POST" enctype="multipart/form-data" class="list-group-item">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<button class="btn btn-primary">Create New Issue</button>
+			</form>	
+		</div>
+	</div>
+
+	<div class="d-flex justify-content-center">
+		<div class="col-md-8">
+			<div class="container-fluid">
+                <div class="row justify-content-center" >
+               </div>
+            </div>
+		</div>
+	</div>
+
+	<div class="container local-issues" id="local-issues" style="display: none;">
+		<h3 align="center">Local Issues</h3>
+		<div class="row justify-content-center" id="issue-container" url="/api/locale-issues/?token={{token}}&locale=Sylhet" renderID="issue-container">
+
+		</div>
+	</div>
 
 {% endblock %}
 
 
 
 {% block extra_script %}
+	<script type="text/javascript" src="{% static 'lib/react.min.js' %}"></script>
+ 	<script type="text/javascript" src="{% static 'lib/react-dom.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'lib/browser.min.js' %}"></script>
+
+    <script type="text/babel" src="{% static 'react/locale_issues.js' %}"></script>
 
 {% endblock %}

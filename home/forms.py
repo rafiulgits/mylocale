@@ -7,7 +7,7 @@ class IssueForm(forms.ModelForm):
 
 	class Meta:
 		model = Issue
-		fields = ['title', 'body', 'media']
+		fields = ['title', 'body', 'media', 'address']
 
 		widgets = {
 			'title' : forms.TextInput(attrs=
@@ -15,6 +15,8 @@ class IssueForm(forms.ModelForm):
 			'body' : forms.Textarea(attrs=
 				{'class' : 'form-control', 'placeholder' : 'Issue Description'}),
 			'media' : forms.FileInput(attrs=
+				{'class' : 'form-control'}),
+			'address' : forms.TextInput(attrs=
 				{'class' : 'form-control'})
 		}
 
@@ -22,7 +24,6 @@ class IssueForm(forms.ModelForm):
 	def save(self, commit=True):
 		issue = super(IssueForm, self).save(commit=False)
 		issue.user = self.user
-		issue.location = self.location
 		if commit:
 			issue.save()
 
@@ -31,7 +32,6 @@ class IssueForm(forms.ModelForm):
 
 	def __init__(self, *args, **kwargs):
 		self.user = kwargs.pop('user', None)
-		self.location = kwargs.pop('location', None)
 		super(IssueForm, self).__init__(*args, **kwargs)
 
 

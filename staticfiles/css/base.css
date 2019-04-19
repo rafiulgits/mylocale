@@ -2,6 +2,9 @@ body {
 	font-family: 'Roboto', sans-serif;
 	background: #FAFCFF;
 }
+.container {
+    margin-bottom: 30px;
+}
 .profile-button {
 	font-size: 35px;
     margin-left: 50px;

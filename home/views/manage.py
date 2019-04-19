@@ -26,15 +26,16 @@ def index(request):
 
 def search(request):
 	if request.method != 'POST':
-		return Http404('invalid request')
+		return HttpResponse('invalid request')
 
 	query = request.POST.get('query', None)
 	context = {}
 
 	# issue result
 	issue_result =Issue.objects.annotate(
-		search=SearchVector('user__name', 'title', 'body','location__address')
+		search=SearchVector('user__name', 'title', 'body', 'address')
 		).filter(search=query)
+
 
 	# task result
 	task_result = Task.objects.annotate(
@@ -62,12 +63,3 @@ def search(request):
 	return render(request, 'home/manage/search.html', context)
 
 
-
-@login_required(login_url=LOGIN_URL)
-def staff_panel(request):
-	if not request.user.is_staff:
-		return HttpResponse('access denied')
-
-	context = {}
-
-	return render(request, 'home/manage/staff_panel.html', context)

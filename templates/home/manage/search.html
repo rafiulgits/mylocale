@@ -7,6 +7,39 @@
 
 
 {% block extra_body %}
+	<h4 align="center">Issue Result</h4>
+	{% for item in issue_result %}
+		<div class="issue-card">
+			<h3 class="issue-title">{{ item.title}}</h3>
+			<small class="issue-data"><i class="fas fa-user"></i>{{item.user.name}} <i class="fas fa-calendar-alt"></i>{{item.time_date}}<i class="fas fa-map-marker-alt"></i> {{item.address}}</small>
+			<p class="issue-details">{{item.body}}</p>
+			<a href="/issue/{{item.uid}}/" class="issue-see-more btn btn-info btn-sm">See More</a>
+			<div class="row issue-interract-buttons">
+				<button class="col btn btn-info"><i class="fas fa-heart"></i> Upvote (1.2M)</button>
+				<button class="col btn btn-info"><i class="fas fa-comment-alt"></i> Comment (23k)</button>
+			</div>
+		</div>
+	{% endfor %}
+	<br>
+
+	<h4 align="center">Task Result</h4>
+	{% for item in task_result %}
+
+	{% endfor %}
+	<br>
+
+	<h4 align="center">Crop Result</h4>
+	{% for item in crop_result %}
+
+	{% endfor %}
+	<br>
+
+
+	<h4 align="center">Event Result</h4>
+	{% for item in event_result %}
+
+	{% endfor %}
+	<br>
 
 {% endblock %}
 

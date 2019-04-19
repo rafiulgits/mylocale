@@ -1,0 +1,50 @@
+.container {
+	margin-top: 50px;
+}
+
+.col-md-6 {
+	margin-bottom: 30px;
+}
+
+.panel-row {
+	margin-bottom: 30px;
+}
+
+#map {
+	height: 100%;
+	display: block;
+	width: 100%;
+	background: grey;
+}
+.issue-card, .task-card {
+	background: #fff;
+	padding: 10px 15px 0px 15px;
+	border: 1px solid #DDDFE2;
+	border-radius: 5px;
+	margin-top: 50px;
+}
+.issue-title {
+	margin-bottom: 0;
+}
+.issue-data {
+	display: block;
+	width: 100%;
+	margin-bottom: 10px;
+	padding-top: 5px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #DDDFE2;
+	color: #888;
+}
+.issue-details, .task-details {
+	overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+.issue-interract-buttons, .task-interract-buttons {
+	margin-top: 15px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	/*background: #17A2B8;*/
+}
