@@ -13,7 +13,7 @@
 </head>
 <body>
 
-	<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-success position-relative">
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-success position-relative">
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -21,31 +21,40 @@
 			<a class="navbar-brand" href="/">My Locale</a>
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<li class="nav-item active">
-				<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+				<a class="nav-link text-white" href="/agriculture/">E-Agriculture</a>
 				</li>
 				<li class="nav-item">
-				<a class="nav-link" href="#">Link</a>
+				<a class="nav-link text-white" href="/task/list/">Running Tasks</a>
 				</li>
 				<li class="nav-item">
-				<a class="nav-link disabled" href="#">Disabled</a>
+				<a class="nav-link text-white" href="/issue/list/">All Issues</a>
 				</li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0" method="POST" action="/search/">
 				{% csrf_token %}
 				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-				<button class="btn btn-light my-2 my-sm-0" type="submit">Search</button>
+				<button class="btn btn-light my-2 my-sm-0 mr-2" type="submit">Search</button>
 			</form>
-
-			<div class="dropdown">
+			{% if request.user.is_authenticated %}
+				{% if request.user.is_staff %}
+					<a class="btn btn-dark mr-2" href="/staff-panel/">Staff Panel</a>
+				{% endif %}
+				<div class="dropdown">
                     <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user-circle profile-button"></i>
+                        <div class="thumbnail-block">
+                        	<img src="{{request.user.thumbnail}}">
+                        </div>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="#">Akkas Ali</a>
-                        <a class="dropdown-item" href="#">Create Issue</a>
-                        <a class="dropdown-item" href="#">Sign Out</a>
+                        <a class="dropdown-item" href="/account/">{{request.user.name }}</a>
+                        <a class="dropdown-item" href="/issue/create/">Create Issue</a>
+                        <a class="dropdown-item" href="/account/signout/">Sign Out</a>
                     </div>
                 </div>
+              {% else %}
+              	<a href="/account/signin/" class="btn btn-dark mr-2">Signin</a>
+              	<a href="/account/signup/" class="btn btn-dark mr">Signup</a>
+              {% endif %}
 			<!-- Profile -->
 		</div>
 	</nav>

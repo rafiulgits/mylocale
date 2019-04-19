@@ -39,4 +39,4 @@ def create(request):
 	context = {}
 	context['form'] = form
 
-	return render(request, 'farmer/crop/create.html', context)
+	return render(request, 'farmer/event/create.html', context)

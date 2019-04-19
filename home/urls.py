@@ -8,6 +8,7 @@ urlpatterns = [
 	path('', manage.index, name='index'),
 
 	path('search/', manage.search, name='search'),
+	path('staff-panel/', manage.staff_panel, name='staff-panel'),
 
 	path('issue/create/', issue.create, name='issue-create'),
 	path('issue/list/', issue.list, name='issue-list'),
@@ -17,5 +18,4 @@ urlpatterns = [
 	path('task/create/', task.create, name='task-create'),
 	path('task/list/', task.list, name='task-list'),
 	path('task/view/', task.view, name='task-view'),
-
 ]

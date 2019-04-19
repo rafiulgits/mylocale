@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+	<title>E-Agriculture</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/generic/card.css' %}">
+{% endblock %}
+
+
+
+{% block extra_body %}
+	<h2 align="center">E-Agriculture</h2>
+	<div class="d-flex justify-content-center">
+		<div class="col-md-10">
+			<figure class="card-container dash-card">
+		        <img src="http://on-line-foods.com/web1/images/Fruits-and-Vegetables.jpg">
+		        <figcaption>
+		            <h3 class="title">ফসল ব্লগ</h3>
+		        </figcaption>
+		        <a href="/agriculture/crop/all/"></a>
+		    </figure>
+		    <figure class="card-container dash-card">
+		        <img src="https://assetsds.cdnedge.bluemix.net/sites/default/files/styles/big_2/public/feature/images/haor_relief_1.jpg?itok=TqJtC9Z2">
+		        <figcaption>
+		            <h3 class="title">ঘোষণা</h3>
+		        </figcaption>
+		        <a href="/agriculture/event/all/"></a>
+		    </figure>	
+		</div>
+	</div>
+{% endblock %}
+
+
+
+{% block extra_script %}
+
+{% endblock %}

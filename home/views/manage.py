@@ -1,5 +1,8 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchVector
 from django.shortcuts import render, redirect, HttpResponse,Http404
+
+from generic.variables import LOGIN_URL
 
 from home.models import Task, Issue
 
@@ -57,3 +60,14 @@ def search(request):
 	context['event_result'] = event_result
 
 	return render(request, 'home/manage/search.html', context)
+
+
+
+@login_required(login_url=LOGIN_URL)
+def staff_panel(request):
+	if not request.user.is_staff:
+		return HttpResponse('access denied')
+
+	context = {}
+
+	return render(request, 'home/manage/staff_panel.html', context)
