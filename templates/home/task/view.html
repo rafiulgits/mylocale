@@ -10,7 +10,15 @@
 
 {% block extra_body %}
 	<div class="container">
-	    <h1 class="task-title">{{ task.title }}<span class="badge badge-pill badge-info b">Processing</span></h1>
+	    <h1 class="task-title">{{ task.title }}
+	    	{% if task.is_running %}
+	    		<span class="badge badge-pill badge-info b">Processing</span>
+	    		<a href="/task/{{task.id}}/close/" class="btn btn-outline-danger">Make Close</a>
+	    	{% else %}
+	    		<span class="badge badge-pill badge-danger b">Closed</span>
+	    		<a href="/task/{{task.id}}/reopen/" class="btn btn-outline-success">Re Open</a>
+	    	{% endif %}
+	    </h1>
 	    <p class="task-details">
 	    	{{ task.description}}
 	    </p>

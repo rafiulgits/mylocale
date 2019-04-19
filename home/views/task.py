@@ -25,9 +25,14 @@ def view(request,task_id):
 			if request.method == 'POST':
 				form = UserTaskReportForm(request.POST, report_obj=report_obj)
 				if form.is_valid():
-					user_report = UserTaskReport(user=request.user, task=task)
-					user_report.report = form.cleaned_data['report']
-					user_report.save()
+					if report_obj:
+						report_obj.report = form.cleaned_data['report']
+						report_obj.save()
+
+					else:
+						user_report = UserTaskReport(user=request.user, task=task)
+						user_report.report = form.cleaned_data['report']
+						user_report.save()
 					return redirect('/task/'+task_id+'/')
 
 			form = UserTaskReportForm(report_obj=report_obj)
@@ -114,6 +119,58 @@ def update(request, task_id):
 
 
 		return render(request, 'home/task/update.html', context)
+
+	except ObjectDoesNotExist as e:
+		pass
+
+	return HttpResponse('invalid request')
+
+
+@login_required(login_url=LOGIN_URL)
+def close(request, task_id):
+	if not request.user.is_staff:
+		HttpResponse('access denied')
+
+	try:
+		task = Task.objects.get(id=task_id)
+		issues = task.issues.all()
+
+		for item in issues:
+			item.is_open = False
+			item.in_progress = False
+			item.save()
+
+		task.is_running = False
+		task.save()
+
+		return redirect('/task/'+task_id+'/')
+
+	except ObjectDoesNotExist as e:
+		pass
+
+	return HttpResponse('invalid request')
+
+
+
+
+@login_required(login_url=LOGIN_URL)
+def reopen(request, task_id):
+	if not request.user.is_staff:
+		HttpResponse('access denied')
+
+	try:
+		task = Task.objects.get(id=task_id)
+		issues = task.issues.all()
+
+		for item in issues:
+			item.is_open = True
+			item.in_progress = True
+			item.save()
+
+		task.is_running = True
+		task.save()
+
+		return redirect('/task/'+task_id+'/')
 
 	except ObjectDoesNotExist as e:
 		pass
