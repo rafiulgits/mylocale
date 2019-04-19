@@ -1,0 +1,24 @@
+.container {
+	margin-top: 30px;
+	background: #fff;
+	border: 1px solid #DDDFE2;
+	border-radius: 5px;
+	padding: 15px 25px;
+}
+.crop-title {
+	display: block;
+	width: 100%;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #DDDFE2;
+}
+.crop-image {
+	margin-bottom: 20px;
+	max-width: 90%;
+	margin-left: 5%;
+}
+.crop-details {
+	font-size: 1.25rem;
+	text-align: justify;
+	margin-bottom: 50px;
+}

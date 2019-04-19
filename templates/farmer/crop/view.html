@@ -1,17 +1,71 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block extra_head %}
-	<title>Crop View</title>
+<title>Crop View</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/farmer/crop/view.css' %}">
 {% endblock %}
-
 
 
 {% block extra_body %}
-
+	<div class="container">
+	    <h1 class="crop-title">Dhaan</h1>
+	    <div id="demo" class="carousel slide crop-image" data-ride="carousel">
+	        <ul class="carousel-indicators">
+	            <li data-target="#demo" data-slide-to="0" class="active"></li>
+	            <li data-target="#demo" data-slide-to="1"></li>
+	            <li data-target="#demo" data-slide-to="2"></li>
+	        </ul>
+	        <div class="carousel-inner">
+	            <div class="carousel-item active">
+	                <img src="https://s3-us-west-2.amazonaws.com/climate-com/images/data_visualization_banner_desktop.jpg" alt="Crop Field" width="1500px" height="500px">
+	                <div class="carousel-caption">
+	                    <h3>Dhaan</h3>
+	                    <p>Onek Shundor Dhaan</p>
+	                </div>
+	            </div>
+	            <div class="carousel-item">
+	                <img src="https://images.unsplash.com/photo-1483871788521-4f224a86e166?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" alt="Rippen" width="1500px" height="500px">
+	                <div class="carousel-caption">
+	                    <h3>Dhaan</h3>
+	                    <p>Onek Shundor Dhaan</p>
+	                </div>
+	            </div>
+	            <div class="carousel-item">
+	                <img src="https://jooinn.com/images/fields-5.jpg" alt="Winter" width="1500px" height="500px">
+	                <div class="carousel-caption">
+	                    <h3>Dhaan</h3>
+	                    <p>Onek Shundor Dhaan</p>
+	                </div>
+	            </div>
+	        </div>
+	        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+	            <span class="carousel-control-prev-icon"></span>
+	        </a>
+	        <a class="carousel-control-next" href="#demo" data-slide="next">
+	            <span class="carousel-control-next-icon"></span>
+	        </a>
+	    </div>
+	    <p class="crop-details">Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+	        Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. <br> Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+	        Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+	    </p>
+	    <form>
+	        <div class="input-group mb-3">
+			    <textarea class="form-control" placeholder="Add Comment"></textarea>
+			    <div class="input-group-append">
+		        	<button class="btn btn-info">Submit</button>
+		      	</div>
+		    </div>
+	    </form>
+	    <div class="comments">
+	    	<img src="https://avatars3.githubusercontent.com/u/3599324?s=400&v=4" alt="person" width="60px" height="60px" style="display:inline-block">
+	    	<h5 style="display:inline-block"> Person <br><small>Date | Time</small></h5>
+	    	<p> Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p> <br>
+	    </div>
+	</div>
 {% endblock %}
 
 
-
 {% block extra_script %}
-
 {% endblock %}
