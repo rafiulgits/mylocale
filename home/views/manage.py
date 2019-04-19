@@ -62,5 +62,3 @@ def search(request):
 	return render(request, 'home/manage/search.html', context)
 
 
-
-
