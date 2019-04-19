@@ -19,8 +19,7 @@
 				<p class="issue-details">{{item.body}}</p>
 				<a href="/issue/{{item.uid}}/" class="issue-see-more btn btn-info btn-sm">See More</a>
 				<div class="row issue-interract-buttons">
-					<button class="col btn btn-info"><i class="fas fa-heart"></i> Upvote (1.2M)</button>
-					<button class="col btn btn-info"><i class="fas fa-comment-alt"></i> Comment (23k)</button>
+					<button class="col btn btn-info"><i class="fas fa-heart"></i> Upvote ({{ item.vote }})</button>
 				</div>
 			</div>
 		{% endfor %}

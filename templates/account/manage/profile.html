@@ -41,7 +41,7 @@
             </ul>
             <br>
             <a id="issues-created-by-me" href="#" class="list-group-item list-group-item-action list-group-item-info" onclick="showIssueCreated();"> Issues Created By Me</a>
-            <a id="solved-issues" href="#" class="list-group-item list-group-item-action "> Solved Issues</a>
+            <a id="solved-issues" href="#" class="list-group-item list-group-item-action "  onclick="showSolvedIssues();"> Solved Issues</a>
             <a id="issues-progressing" href="#" class="list-group-item list-group-item-action" onclick="showIssueProgressing();"> Issues Progressing</a>
             <a id="update-profile" href="/account/update/" class="list-group-item list-group-item-action list-group-item-info"> Update</a>
           </div>
@@ -52,16 +52,20 @@
 
         <div class="issues-created-by-me" id="issue-created-by-me-div">
             {% for issue in issues %}
-                <div class="issue-card">
+                {% if issue.is_open == True  %}
+                    <div class="issue-card">
                                 <h3 class="issue-title">{{ issue.title }}</h3>
                                 <small class="issue-data"><i class="fas fa-user"></i> {{ issue.user }} <i class="fas fa-calendar-alt"></i> {{ issue.time_date }}  <i class="fas fa-map-marker-alt"></i> State of Noakhali</small>
                                 <p class="issue-details">{{ issue.body }}</p>
-                                <a href="#" class="issue-see-more btn btn-info btn-sm">See More</a>
+                                <a href="/issue/{{ issue.uid }}/" class="issue-see-more btn btn-info btn-sm">See More</a>
                                 <div class="row issue-interract-buttons">
                                     <button class="col btn btn-info"><i class="fas fa-heart"></i> Upvote ({{ issue.vote }})</button>
-                                    <button class="col btn btn-info"><i class="fas fa-comment-alt"></i> Comment (23k)</button>
                                 </div>
-                </div><br>
+                    </div><br>
+
+                {% endif %}
+
+
 
             {% endfor %}
 
@@ -75,17 +79,16 @@
         <div class="issues-progressing" id="issue-progressing-div" style="display: none;">
 
             {% for issue in issues %}
-                {% if issue.in_progress %}
+                {% if issue.is_running and issue.is_open %}
                     <div class="issue-card">
                                 <h3 class="issue-title">{{ issue.title }}</h3>
                                 <small class="issue-data"><i class="fas fa-user"></i> {{ issue.user }} <i class="fas fa-calendar-alt"></i> {{ issue.time_date }}  <i class="fas fa-map-marker-alt"></i> State of Noakhali</small>
                                 <p class="issue-details">{{ issue.body }}</p>
-                                <a href="#" class="issue-see-more btn btn-info btn-sm">See More</a>
+                                <a href="/issue/{{ issue.uid }}/" class="issue-see-more btn btn-info btn-sm">See More</a>
                                 <div class="row issue-interract-buttons">
                                     <button class="col btn btn-info"><i class="fas fa-heart"></i> Upvote ({{ issue.vote }})</button>
-                                    <button class="col btn btn-info"><i class="fas fa-comment-alt"></i> Comment (23k)</button>
                                 </div>
-                    </div>
+                    </div><br>
 
                 {% endif %}
 
@@ -95,6 +98,34 @@
 
         </div>
 
+
+
+    </div>
+
+
+    <div class="col-md-8">
+
+        <div class="issues-solved" id="issue-solved-div" style="display: none;">
+
+            {% for issue in issues %}
+                {% if issue.is_running == False and issue.is_open == False %}
+                    <div class="issue-card">
+                                <h3 class="issue-title">{{ issue.title }}</h3>
+                                <small class="issue-data"><i class="fas fa-user"></i> {{ issue.user }} <i class="fas fa-calendar-alt"></i> {{ issue.time_date }}  <i class="fas fa-map-marker-alt"></i> State of Noakhali</small>
+                                <p class="issue-details">{{ issue.body }}</p>
+                                <a href="/issue/{{ issue.uid }}/" class="issue-see-more btn btn-info btn-sm">See More</a>
+                                <div class="row issue-interract-buttons">
+                                    <button class="col btn btn-info"><i class="fas fa-heart"></i> Upvote ({{ issue.vote }})</button>
+                                </div><br>
+                    </div>
+
+                {% endif %}
+
+
+            {% endfor %}
+
+
+        </div>
 
 
     </div>
