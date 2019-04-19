@@ -1,0 +1,42 @@
+.container {
+	margin-top: 80px;
+	color: #333;
+	background: #fff;
+	border: 1px solid #DDDFE2;
+	border-radius: 5px;
+	padding: 15px 30px;
+}
+
+.task-title {
+	display: block;
+	width: 100%;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #DDDFE2;
+}
+
+.badge {
+	font-size: 15px;
+}
+
+.task-image {
+	margin-bottom: 20px;
+	max-width: 90%;
+	margin-left: 5%;
+}
+
+.task-details {
+	font-size: 1.25rem;
+	text-align: justify;
+	margin-bottom: 50px;
+}
+
+.task-interraction-buttons {
+	margin-bottom: 20px;
+}
+
+.comment-text {
+	border-right: 5px solid #91C3D2;
+	padding-right: 10px;
+	
+}
