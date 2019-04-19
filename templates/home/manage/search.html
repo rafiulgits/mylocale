@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block extra_head %}
 	<title>Search "{{query}}"</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/home/manage/index.css' %}">
 {% endblock %}
 
 
