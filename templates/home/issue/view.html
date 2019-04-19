@@ -9,11 +9,24 @@
 
 
 {% block extra_body %}
+
+
+	<div class="delete-box-wrapper" id="delete-box-wrapper">
+		<div class="delete-box">
+			<div class="d-flex justify-content-center">
+				<h3 class="delete-warning-text">Are you sure?</h3>
+				<br>
+				<a href="/issue/{{issue.uid}}/delete/" class="btn btn-danger">Yes</a>
+				<a href="#" class="btn btn-primary" onclick="closeAlert();">No</a>
+			</div>
+		</div>
+	</div>
+
 	{% if request.user.is_authenticated %}
 		{% if request.user == issue.user %}
-			<div class="d-flex justify-content-center">
-				<a href="/issue/{{issue.uid}}/update/" class="btn btn-primary">Update</a>
-				<a href="/issue/{{issue.uid}}/delete/" class="btn btn-danger">Delete</a>
+			<div class="crud-button">
+				<a href="/issue/{{issue.uid}}/update/" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+				<a href="#" class="btn btn-danger" onclick="showAlert();"><i class="fas fa-trash-alt"></i></a>
 			</div>
 		{% endif %}
 	{% endif %}
@@ -56,5 +69,15 @@
 
 
 {% block extra_script %}
+
+	<script type="text/javascript">
+		function showAlert() {
+			document.getElementById('delete-box-wrapper').style.display = 'block';
+		}
+
+		function closeAlert() {
+			document.getElementById('delete-box-wrapper').style.display = 'none';
+		}
+	</script>
 
 {% endblock %}
