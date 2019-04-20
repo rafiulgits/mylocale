@@ -69,7 +69,7 @@ class Account(AbstractBaseUser,PermissionsMixin):
 	objects = UserManager()
 
 	def __str__(self):
-		return self.name + ': '+self.phone
+		return self.name
 
 	def get_username(self):
 		return self.phone

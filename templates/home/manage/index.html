@@ -44,17 +44,17 @@
 			<div class="col-md-4">
 				<a class="btn btn-success create-issue" href="/issue/create/" style="width: 100%; font-size: 25px; line-height: 75px; height: 100px;">Create An Issue</a>
 
-				<div class="my-issues sidenav-card">
-					<h4 class="my-issues-title sidenav-title">Your Issues</h4>
-					<ul class="sidenav-list">
-                        {% for issue in issues %}
-                            <li class="sidenav-list-option"><a href="/issue/{{ issue.uid }}/"> {{ issue.title }} </a></li>
+				{% if request.user.is_authenticated %}
+					<div class="my-issues sidenav-card">
+						<h4 class="my-issues-title sidenav-title">Your Issues</h4>
+						<ul class="sidenav-list">
+	                        {% for issue in issues %}
+	                            <li class="sidenav-list-option"><a href="/issue/{{ issue.uid }}/"> {{ issue.title }} </a></li>
 
-                        {% endfor %}
-
-
-					</ul>
-				</div>
+	                        {% endfor %}
+						</ul>
+					</div>
+				{% endif %}
 
 				<div class="trending-issues sidenav-card">
 					<h4 class="trending-issues-title sidenav-title">Trending Issues</h4>
