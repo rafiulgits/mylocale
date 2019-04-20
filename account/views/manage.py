@@ -1,5 +1,5 @@
 from account.forms import ProfileUpdateForm
-from account.models import Account
+from account.models import Account, Notification
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, HttpResponse
@@ -38,3 +38,17 @@ def update(request):
 	context['form'] = form
 
 	return render(request, 'account/manage/update.html', context)
+
+
+
+@login_required(login_url=LOGIN_URL)
+def notification(request):
+	context = {}
+	if request.user.has_notification:
+		request.user.has_notification = False
+		request.user.save()
+
+	notification_list = Notification.objects.filter(user_id=request.user.id).order_by('-time_date')
+	context['notification_list'] = notification_list
+
+	return render(request,'account/manage/notification.html', context)

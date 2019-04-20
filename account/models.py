@@ -97,3 +97,4 @@ class Notification(models.Model):
 	body = models.CharField(max_length=80)
 	action = models.CharField(max_length=120, default='#')
 	user = models.ForeignKey(Account, on_delete=models.CASCADE)
+	time_date = models.DateTimeField(auto_now_add=True)

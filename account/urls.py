@@ -8,6 +8,7 @@ urlpatterns = [
 
 	path('', manage.profile, name='profile'),
 	path('update/', manage.update, name='profile-update'),
+	path('notification/', manage.notification, name='notification'),
 	
 
 	path('signin/', auth.signin, name='signin'),
