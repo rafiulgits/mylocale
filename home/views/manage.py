@@ -12,8 +12,13 @@ def index(request):
 	context = {}
 
 	task_list = Task.objects.filter(is_running=True).order_by('-time_date')[:5]
-	trending_issue = Issue.objects.filter(is_open=True).order_by('-time_date')[:10]
+	trending_issue = Issue.objects.filter(is_open=True).order_by('-vote')[:10]
 	recent_issue = Issue.objects.order_by('-time_date')[:10]
+
+	user = request.user
+
+	issues = Issue.objects.filter(user_id=user.id)[:5]
+	context['issues'] = issues
 
 	context['task_list'] = task_list
 	context['trending_issue'] = trending_issue
@@ -35,7 +40,7 @@ def search(request):
 	issue_result =Issue.objects.annotate(
 		search=SearchVector('user__name', 'title', 'body', 'address')
 		).filter(search=query)
-
+	
 
 	# task result
 	task_result = Task.objects.annotate(

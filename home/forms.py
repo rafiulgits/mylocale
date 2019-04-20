@@ -169,3 +169,11 @@ class UserTaskReportForm(forms.ModelForm):
 
 		if self.user_report is not None:
 			self.fields['report'].initial = self.user_report.report
+
+
+
+
+
+class AvailableIssuesForm(forms.Form):
+	issues = forms.ModelMultipleChoiceField(queryset=Issue.objects.filter(is_open=True).filter(in_progress=False),
+		widget=forms.CheckboxSelectMultiple(attrs={}))

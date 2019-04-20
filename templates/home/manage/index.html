@@ -14,81 +14,56 @@
 		<div class="row">
 			<div class="col-md-8">
 				<div class="issues">
-					<h2 class="local-issue-header">Local Issues</h2>
+					<h2 class="local-issue-header">Recent Issues</h2>
 					<div class="issue-card-sec">
-						<div class="issue-card">
-							<h3 class="issue-title">Bridge Vainga Gese</h3>
-							<small class="issue-data"><i class="fas fa-user"></i> Akkas Ali <i class="fas fa-calendar-alt"></i>  1 April, 2019 <i class="fas fa-map-marker-alt"></i> State of Noakhali</small>
-							<p class="issue-details">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-							<a href="#" class="issue-see-more btn btn-info btn-sm">See More</a>
-							<div class="row issue-interract-buttons">
-								<button class="col btn btn-info"><i class="fas fa-heart"></i> Upvote (1.2M)</button>
-								<button class="col btn btn-info"><i class="fas fa-comment-alt"></i> Comment (23k)</button>
+                        {% for issue in recent_issue %}
+                            <div class="issue-card">
+								<h3 class="issue-title">{{ issue.title }}</h3>
+								<small class="issue-data"><i class="fas fa-user"></i> {{ issue.user }} <i class="fas fa-calendar-alt"></i>  {{ issue.time_date }} <i class="fas fa-map-marker-alt"></i> {{ issue.address }}</small>
+								<p class="issue-details">{{ issue.body }}</p>
+								<a href="/issue/{{ issue.uid }}/" class="issue-see-more btn btn-info btn-sm d-inline-block mr-2">See More</a>
+								<p class="d-inline-block mb-3"><i class="fas fa-heart"></i>({{ issue.vote }})</p>
 							</div>
-						</div>
+                        {% endfor %}
 
-						<div class="issue-card">
-							<h3 class="issue-title">Bridge Vainga Gese</h3>
-							<small class="issue-data"><i class="fas fa-user"></i> Akkas Ali <i class="fas fa-calendar-alt"></i>  1 April, 2019 <i class="fas fa-map-marker-alt"></i> State of Noakhali</small>
-							<p class="issue-details">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-							<a href="#" class="issue-see-more btn btn-info btn-sm">See More</a>
-							<div class="row issue-interract-buttons">
-								<button class="col btn btn-info"><i class="fas fa-heart"></i> Upvote (1.2M)</button>
-								<button class="col btn btn-info"><i class="fas fa-comment-alt"></i> Comment (23k)</button>
-							</div>
-						</div>
 					</div>
 				</div>
 				<div class="tasks">
 					<h2 class="tasks-header">Acive Tasks</h2>
 					<div class="task-card-sec">
-						<div class="task-card">
-							<h3 class="task-title">Bridge Vainga Gese</h3>
-							<p class="task-details">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-							<a href="#" class="task-see-more btn btn-info btn-sm">See More</a>
-							<div class="row task-interract-buttons">
-								<button class="col btn btn-info"><i class="fas fa-heart"></i> Upvote (1.2M)</button>
-								<button class="col btn btn-info"><i class="fas fa-comment-alt"></i> Comment (23k)</button>
+						{% for item in task_list %}
+							<div class="task-card">
+								<h3 class="task-title">{{item.title}}</h3>
+								<p class="task-details">{{item.description}}</p>
+								<a href="/task/{{item.id}}/" class="task-see-more btn btn-info btn-sm mb-3">See More</a>
 							</div>
-						</div>
+						{% endfor %}
 					</div>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<a class="btn btn-success create-issue" href="/issue/create/" style="width: 100%; font-size: 25px; line-height: 75px; height: 100px;">Create An Issue</a>
 
-				<div class="my-issues sidenav-card">
-					<h4 class="my-issues-title sidenav-title">Your Issues</h4>
-					<ul class="sidenav-list">
-						<li class="sidenav-list-option"><a href="#">Khamba vainga porse</a></li>
-						<li class="sidenav-list-option"><a href="#">Khamba vainga porse</a></li>
-						<li class="sidenav-list-option"><a href="#">Khamba vainga porse</a></li>
-						<li class="sidenav-list-option"><a href="#">Khamba vainga porse</a></li>
-					</ul>
-				</div>
+				{% if request.user.is_authenticated %}
+					<div class="my-issues sidenav-card">
+						<h4 class="my-issues-title sidenav-title">Your Issues</h4>
+						<ul class="sidenav-list">
+	                        {% for issue in issues %}
+	                            <li class="sidenav-list-option"><a href="/issue/{{ issue.uid }}/"> {{ issue.title }} </a></li>
+
+	                        {% endfor %}
+						</ul>
+					</div>
+				{% endif %}
 
 				<div class="trending-issues sidenav-card">
 					<h4 class="trending-issues-title sidenav-title">Trending Issues</h4>
 					<ul class="sidenav-list">
-						<li class="sidenav-list-option"><a href="#">Khamba vainga porse</a></li>
-						<li class="sidenav-list-option"><a href="#">Khamba vainga porse</a></li>
-						<li class="sidenav-list-option"><a href="#">Khamba vainga porse</a></li>
-						<li class="sidenav-list-option"><a href="#">Khamba vainga porse</a></li>
+                        {% for issue in trending_issue  %}
+                            <li class="sidenav-list-option"><a href="/issue/{{ issue.uid }}/">{{ issue.title }}</a></li>
+                        {% endfor %}
+
+
 					</ul>
 				</div>
 			</div>

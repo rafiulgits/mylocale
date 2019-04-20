@@ -6,8 +6,8 @@ from django.shortcuts import render, redirect, HttpResponse
 
 from generic.variables import LOGIN_URL
 
-from home.models import Task, UserTaskReport
-from home.forms import TaskForm, TaskUpdateForm, UserTaskReportForm
+from home.models import Task, UserTaskReport, Issue
+from home.forms import TaskForm, TaskUpdateForm, UserTaskReportForm,AvailableIssuesForm
 
 
 def view(request,task_id):
@@ -171,6 +171,63 @@ def reopen(request, task_id):
 		task.save()
 
 		return redirect('/task/'+task_id+'/')
+
+	except ObjectDoesNotExist as e:
+		pass
+
+	return HttpResponse('invalid request')
+
+
+
+
+@login_required(login_url=LOGIN_URL)
+def update_issues(request, task_id):
+	if not request.user.is_staff:
+		HttpResponse('access denied')
+
+	try:
+		context = {}
+		task = Task.objects.get(id=task_id)
+
+		if request.method == 'GET':
+			delete = request.GET.get('delete', None)
+			if delete:
+				try:
+					issue = Issue.objects.get(uid=delete)
+					task.issues.remove(issue)
+					issue.in_progress = False
+					issue.save()
+
+					return redirect('/task/'+task_id+'/update-issues/')
+
+				except ObjectDoesNotExist as e:
+					pass
+
+
+		if request.method == 'POST':
+			new_issues_form = AvailableIssuesForm(request.POST)
+			if new_issues_form.is_valid():
+				new_issues = new_issues_form.cleaned_data['issues']
+				for item in new_issues:
+					task.issues.add(item)
+					item.in_progress = True
+					item.save()
+
+
+				return redirect('/task/'+task_id+'/update-issues/')
+
+		issues = task.issues.all()
+
+		available = Issue.objects.filter(is_open=True).filter(in_progress=False)
+
+		form = AvailableIssuesForm()
+
+		context['task'] = task
+		context['issues'] = issues
+		context['form'] = form
+
+		return render(request, 'home/task/update_issues.html', context)
+		
 
 	except ObjectDoesNotExist as e:
 		pass

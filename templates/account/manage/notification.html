@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+	<title>Notification</title>
+{% endblock %}
+
+
+
+{% block extra_body %}
+	<br>
+	{% for item in notification_list %}
+		<div class="d-flex justify-content-center">
+			<div class="col-md-8">
+				<a href="{{item.action}}" class=" list-group-item  list-group-item-action">{{item.body}}<br>{{item.time_date}}</a>
+			</div>	
+		</div>
+	{% empty %}
+		<h5 align="center">No notification</h5>
+	{% endfor %}
+{% endblock %}
+
+
+
+{% block extra_script %}
+
+{% endblock %}

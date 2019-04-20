@@ -1,3 +1,5 @@
+from account.models import Notification
+
 from api.tokenization import encode as token_encode
 
 from django.contrib.auth.decorators import login_required
@@ -20,6 +22,17 @@ def view(request, uid):
 				form = IssueCommentForm(request.POST, issue=issue, user=request.user)
 				if form.is_valid():
 					form.save()
+
+					if request.user != issue.user:
+						notification = Notification(user=issue.user)
+						notification.body = 'New comment by '+request.user.name
+						notification.action = '/issue/'+uid+'/'
+
+						notification.save()
+
+						issue.user.has_notification = True
+						issue.user.save()
+
 					return redirect('/issue/'+uid+'/#form-block')
 			form = IssueCommentForm()
 			context['form'] = form
