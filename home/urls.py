@@ -29,4 +29,5 @@ urlpatterns = [
 	path('task/<task_id>/update/', task.update, name='task update'),
 	path('task/<task_id>/close/', task.close, name='task-close'),
 	path('task/<task_id>/reopen/', task.reopen, name='task-reopen'),
+	path('task/<task_id>/update-issues/',task.update_issues, name='task-issue-update'),
 ]

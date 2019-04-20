@@ -10,11 +10,10 @@
 {% block extra_body %}
 	<div class="container">
 	        <div class="row">
-
 	        	{% for item in crop_list %}
 	        		<div class="col-sm-12 col-lg-4 col-md-6">
 		                <div class="card">
-		                    <img class="card-img-top" src="/{{item.media}}" alt="Card image" style="width:100%">
+		                    <img class="card-img-top" src="/{{item.media}}" alt="Card image" style="width:100%; height: 200px;">
 		                    <div class="card-body">
 		                        <h4 class="card-title">{{item.name}}</h4>
 		                        <p class="card-text">Category : {{ item.category | cat }}</p>
@@ -23,46 +22,6 @@
 		                </div>
 		            </div>
 	        	{% endfor %}
-	            <div class="col-sm-12 col-lg-4 col-md-6">
-	                <div class="card">
-	                    <img class="card-img-top" src="https://previews.123rf.com/images/lightmoon/lightmoon0910/lightmoon091000020/5663593-autumn-rice-field.jpg" alt="Card image" style="width:100%">
-	                    <div class="card-body">
-	                        <h4 class="card-title">Paddy</h4>
-	                        <p class="card-text">A paddy field is a flooded parcel of arable land used for growing semiaquatic rice. Paddy cultivation should not be confused with cultivation of deepwater rice.</p>
-	                        <a href="#" class="btn btn-primary">See Article</a>
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="col-sm-12 col-lg-4 col-md-6">
-	                <div class="card">
-	                    <img class="card-img-top" src="https://previews.123rf.com/images/lightmoon/lightmoon0910/lightmoon091000020/5663593-autumn-rice-field.jpg" alt="Card image" style="width:100%">
-	                    <div class="card-body">
-	                        <h4 class="card-title">Paddy</h4>
-	                        <p class="card-text">A paddy field is a flooded parcel of arable land used for growing semiaquatic rice. Paddy cultivation should not be confused with cultivation of deepwater rice.</p>
-	                        <a href="#" class="btn btn-primary">See Article</a>
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="col-sm-12 col-lg-4 col-md-6">
-	                <div class="card">
-	                    <img class="card-img-top" src="https://previews.123rf.com/images/lightmoon/lightmoon0910/lightmoon091000020/5663593-autumn-rice-field.jpg" alt="Card image" style="width:100%">
-	                    <div class="card-body">
-	                        <h4 class="card-title">Paddy</h4>
-	                        <p class="card-text">A paddy field is a flooded parcel of arable land used for growing semiaquatic rice. Paddy cultivation should not be confused with cultivation of deepwater rice.</p>
-	                        <a href="#" class="btn btn-primary">See Article</a>
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="col-sm-12 col-lg-4 col-md-6">
-	                <div class="card">
-	                    <img class="card-img-top" src="https://previews.123rf.com/images/lightmoon/lightmoon0910/lightmoon091000020/5663593-autumn-rice-field.jpg" alt="Card image" style="width:100%">
-	                    <div class="card-body">
-	                        <h4 class="card-title">Paddy</h4>
-	                        <p class="card-text">A paddy field is a flooded parcel of arable land used for growing semiaquatic rice. Paddy cultivation should not be confused with cultivation of deepwater rice.</p>
-	                        <a href="#" class="btn btn-primary">See Article</a>
-	                    </div>
-	                </div>
-	            </div>
 	        </div>
 	    </div>
 {% endblock %}

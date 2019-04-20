@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load my_tags %}
 
 {% block extra_head %}
 	<title>Search "{{query}}"</title>
@@ -9,34 +10,31 @@
 
 
 {% block extra_body %}
-	<h4 align="center">Issue Result</h4>
+	<div class="container">
+		<h4 align="center">Issue Result</h4>
 	{% for item in issue_result %}
 		<div class="issue-card">
 			<h3 class="issue-title">{{ item.title}}</h3>
 			<small class="issue-data"><i class="fas fa-user"></i>{{item.user.name}} <i class="fas fa-calendar-alt"></i>{{item.time_date}}<i class="fas fa-map-marker-alt"></i> {{item.address}}</small>
 			<p class="issue-details">{{item.body}}</p>
-			<a href="/issue/{{item.uid}}/" class="issue-see-more btn btn-info btn-sm">See More</a>
-			<div class="row issue-interract-buttons">
-				<button class="col btn btn-info"><i class="fas fa-heart"></i> Upvote (1.2M)</button>
-				<button class="col btn btn-info"><i class="fas fa-comment-alt"></i> Comment (23k)</button>
-			</div>
+			<a href="/issue/{{ item.uid }}/" class="issue-see-more btn btn-info btn-sm d-inline-block mr-2">See More</a>
+			<p class="d-inline-block mb-3"><i class="fas fa-heart"></i>({{ item.vote }})</p>
 		</div>
+	{% empty %}
+		<h6 align="center">No Associated result found for issue</h6>
 	{% endfor %}
 	<br>
 
 	<h4 align="center">Task Result</h4>
 	{% for item in task_result %}
 
-		<div class="task-card">
+		<div class="task-card" style="padding: 8px">
 			<h3 class="task-title">{{ item.title }}</h3>
 			<p class="task-details">{{ item.body }}</p>
 			<a href="/task/{{ item.task_id}}" class="task-see-more btn btn-info btn-sm">See More</a>
-			<div class="row task-interract-buttons">
-				<button class="col btn btn-info"><i class="fas fa-heart"></i> Upvote ({{ item.vote }})</button>
-				<button class="col btn btn-info"><i class="fas fa-comment-alt"></i> Comment (23k)</button>
-			</div>
 		</div>
-
+	{% empty %}
+		<h6 align="center">No Associated result found for task</h6>
 	{% endfor %}
 	<br>
 
@@ -54,15 +52,31 @@
             </div>
         </div>
 
+    {% empty %}
+		<h6 align="center">No Associated result found for crop</h6>
 	{% endfor %}
 	<br>
 
 
 	<h4 align="center">Event Result</h4>
 	{% for item in event_result %}
-
+		<div class="d-flex justify-content-center mb-3">
+			<div class="col-md-12">
+				<a href="/agriculture/event/{{item.uid}}/" class="list-group-item">
+					<div>
+						<h4>{{item.title}}</h4>
+						<h6>{{item.time}} | {{item.date}}</h6>
+					</div>
+				</a>
+			</div>
+		</div>
+	{% empty %}
+		<h6 align="center">No Associated result found for event</h6>
 	{% endfor %}
 	<br>
+	</div>
+
+	
 
 {% endblock %}
 

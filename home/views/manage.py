@@ -40,7 +40,7 @@ def search(request):
 	issue_result =Issue.objects.annotate(
 		search=SearchVector('user__name', 'title', 'body', 'address')
 		).filter(search=query)
-
+	
 
 	# task result
 	task_result = Task.objects.annotate(

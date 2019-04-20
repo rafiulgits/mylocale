@@ -7,16 +7,21 @@
 
 
 {% block extra_body %}
-	<div class="d-flex justify-content-center">
-		<div class="col-md-8">
-			<a href="#" class="list-group-item">
-				<div>
-					<h4>Titile</h4>
-					<h6>Time and Date</h6>
-				</div>
-			</a>
+	<br>
+	{% for item in event_list %}
+		<div class="d-flex justify-content-center mb-3">
+			<div class="col-md-8">
+				<a href="/agriculture/event/{{item.uid}}/" class="list-group-item">
+					<div>
+						<h4>{{item.title}}</h4>
+						<h6>{{item.time}} | {{item.date}}</h6>
+					</div>
+				</a>
+			</div>
 		</div>
-	</div>
+	{% empty %}
+		<h5 align="center">Sorry, No Event</h5>
+	{% endfor %}
 {% endblock %}
 
 

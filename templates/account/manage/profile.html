@@ -54,14 +54,12 @@
             {% for issue in issues %}
                 {% if issue.is_open == True  %}
                     <div class="issue-card">
-                                <h3 class="issue-title">{{ issue.title }}</h3>
-                                <small class="issue-data"><i class="fas fa-user"></i> {{ issue.user }} <i class="fas fa-calendar-alt"></i> {{ issue.time_date }}  <i class="fas fa-map-marker-alt"></i> State of Noakhali</small>
-                                <p class="issue-details">{{ issue.body }}</p>
-                                <a href="/issue/{{ issue.uid }}/" class="issue-see-more btn btn-info btn-sm">See More</a>
-                                <div class="row issue-interract-buttons">
-                                    <button class="col btn btn-info"><i class="fas fa-heart"></i> Upvote ({{ issue.vote }})</button>
-                                </div>
-                    </div><br>
+                        <h3 class="issue-title">{{ issue.title }}</h3>
+                        <small class="issue-data"><i class="fas fa-user"></i> {{ issue.user }} <i class="fas fa-calendar-alt"></i>  {{ issue.time_date }} <i class="fas fa-map-marker-alt"></i> {{ issue.address }}</small>
+                        <p class="issue-details">{{ issue.body }}</p>
+                        <a href="/issue/{{ issue.uid }}/" class="issue-see-more btn btn-info btn-sm d-inline-block mr-2">See More</a>
+                        <p class="d-inline-block mb-3"><i class="fas fa-heart"></i>({{ issue.vote }})</p>
+                    </div>
 
                 {% endif %}
 
